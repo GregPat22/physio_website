@@ -1,27 +1,72 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from './navbar';
 import {motion} from 'framer-motion';
 
 export default function Home() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#e5e9f5] from-10% via-[#c6d6f5] via-50% to-[#b4d6d8] to-90%">
       <Navbar />
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-12 lg:pt-32 items-center justify-center pt-20 gap-8 ">
-        <div className="flex flex-col justify-center lg:pl-20 lg:mt-30">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-family-open-sans font-medium tracking-[2px] text-[#2B3A54]">
+        <motion.div 
+          className="flex flex-col justify-center lg:pl-20 lg:mt-30"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1 
+            className="text-3xl sm:text-4xl lg:text-5xl font-family-open-sans font-medium tracking-[2px] text-[#2B3A54]"
+            variants={itemVariants}
+          >
             Dott. Federico Benni
-          </h1>
-          <p className="text-sm text-gray-500 font-family-roboto-mono font-light tracking-[2px] mt-10">
+          </motion.h1>
+          <motion.p 
+            className="text-sm text-gray-500 font-family-roboto-mono font-light tracking-[2px] mt-10"
+            variants={itemVariants}
+          >
             Fisioterapista
-          </p>
-          <p className="text-sm text-gray-500 font-family-roboto-mono font-light tracking-[2px] mt-[0.2px]">
+          </motion.p>
+          <motion.p 
+            className="text-sm text-gray-500 font-family-roboto-mono font-light tracking-[2px] mt-[0.2px]"
+            variants={itemVariants}
+          >
             Master Universitario in Osteopatia
-          </p>
-        </div>
-        <img 
+          </motion.p>
+        </motion.div>
+        <motion.img 
           src="/benni.jpg" 
           alt="Foto di Federico Benni nella sua clinica" 
-          className=" w-full max-w-md mb-8 lg:absolute lg:top-0 lg:right-0 lg:h-full lg:w-auto lg:max-w-2xl lg:object-cover lg:z-0" 
+          className=" w-full max-w-md mb-8 lg:absolute lg:top-0 lg:right-0 lg:h-full lg:w-auto lg:max-w-2xl lg:object-cover lg:z-0"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
         />
       </div>
     </main>
