@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -112,6 +112,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 10% 10%;
+  }
+  50% {
+    background-position: 90% 90%;
+  }
+  100% {
+    background-position: 10% 10%;
+  }
 }
 
 @layer base {
