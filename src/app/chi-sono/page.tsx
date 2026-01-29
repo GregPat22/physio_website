@@ -38,34 +38,20 @@ export default function ChiSono() {
       }}
     >
       <Navbar />
-      <motion.div
-        className="flex flex-col items-center justify-center gap-8 pt-20 lg:flex-row lg:items-start lg:justify-between lg:gap-12 lg:pt-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div
-          className="flex flex-col justify-center lg:mt-30 lg:pl-20"
-          variants={itemVariants}
-        >
-          <motion.h1
-            className="font-family-open-sans text-3xl font-medium tracking-[2px] text-[#2B3A54] sm:text-4xl lg:text-5xl"
-            variants={itemVariants}
-          >
-            Chi Sono
-          </motion.h1>
-          <motion.div
-            className="font-family-roboto-mono mt-10 max-w-2xl text-sm font-light leading-relaxed tracking-[1px] text-gray-700"
-            variants={itemVariants}
-          >
-            {/* Add your content here */}
-            <p className="mb-4">
-              Benvenuto nella mia pagina personale. Sono il Dott. Federico Benni,
-              fisioterapista e osteopata specializzato.
-            </p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+      <article className="prose prose-sm sm:prose-base lg:prose-lg mx-auto max-w-2xl p-4">
+        <h1>Chi Sono</h1>
+        <p>
+          Benvenuto nella mia pagina personale. Sono il Dott. Federico Benni,
+          fisioterapista e osteopata specializzato. Mi sono laureato in
+          Fisioterapia all'Università di Bologna e ho conseguito il Master
+          Universitario in Osteopatia all'EOM International.
+        </p>
+        <p>
+          Ho lavorato in vari centri di fisioterapia e osteopatia, e ho anche
+          lavorato come fisioterapista per il calcio italiano.
+        </p>
+        <p>Ho anche lavorato come fisioterapista per il calcio italiano.</p>
+      </article>
     </main>
   );
 }

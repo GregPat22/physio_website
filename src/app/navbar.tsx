@@ -9,7 +9,7 @@ const Navbar = () => {
       className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between p-4"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 2.5, ease: [0.4, 0, 0.2, 1] }}
     >
       <a href="/" className="text-2xl font-bold">
         <img src="/sign.svg" alt="Logo" className="h-8 w-full" />
