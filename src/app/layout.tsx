@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Open_Sans, Roboto_Mono, Montserrat } from "next/font/google";
+import { Roboto_Mono, Roboto_Flex } from "next/font/google";
 import "./globals.css";
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-});
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const robotoFlex = Roboto_Flex({
+  variable: "--font-roboto-flex",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} ${robotoMono.variable} ${montserrat.variable} antialiased`}
+        className={`${robotoMono.variable} ${robotoFlex.variable} antialiased`}
       >
         {children}
       </body>
