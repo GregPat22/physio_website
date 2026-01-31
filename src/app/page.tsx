@@ -79,30 +79,27 @@ export default function Home() {
             {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
             <motion.div className="flex flex-row justify-between gap-x-10">
               <motion.a
-                className="mt-20 inline-flex w-fit cursor-pointer items-center overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] px-14 py-4 text-white transition-colors duration-300 hover:bg-[#FFFFFF] hover:text-[#2B3A54] md:ml-20 lg:ml-20"
-                whileHover="hover"
-                initial="initial"
-                variants={{
-                  initial: {},
-                  hover: {},
-                }}
+                href="#prenota"
+                className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] hover:shadow-xl hover:shadow-[#3c5074]/30 md:ml-20 lg:ml-20"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
               >
-                <motion.div
-                  className="absolute left-0 flex items-center"
-                  variants={{
-                    initial: { x: -50, opacity: 0 },
-                    hover: {
-                      x: 265, // Posizione a destra del testo (approssimativa)
-                      opacity: 1,
-                    },
-                  }}
-                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  <ArrowRight className="h-5 w-5" />
-                </motion.div>
-                <span className="relative z-10">
+                {/* Subtle shine effect on hover */}
+                <span className="absolute inset-0 -translate-x-full skew-x-12 bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+
+                {/* Button text */}
+                <span className="relative z-10 text-[12px] font-medium tracking-wider">
                   SCOPRI COME PRENOTARE UNA VISITA
                 </span>
+
+                {/* Arrow - hidden by default, slides in on hover */}
+                <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-5 group-hover:opacity-100">
+                  <ArrowRight className="h-5 w-5 shrink-0" />
+                </span>
+
+                {/* Animated inner border on hover */}
+                <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.a>
             </motion.div>
           </motion.div>
@@ -118,7 +115,6 @@ export default function Home() {
         </div>
       </main>
       <TrustBadge />
-      <Carousel />
       <Footer />
     </>
   );

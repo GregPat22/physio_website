@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { loadMioDottoreWidget } from "@/lib/miodottore-widget";
+import Carousel from "@/components/ui/carousel";
 
 const TrustBadge = () => {
   useEffect(() => {
@@ -9,13 +10,11 @@ const TrustBadge = () => {
   }, []);
 
   return (
-    <section className="border-2 border-red-500">
-      <h1 className="font-family-open-sans mx-auto w-fit border-2 border-red-500 text-center text-2xl font-bold text-[#2B3A54] sm:text-4xl md:text-left">
-        <span className="font-family-open-sans items-center text-center text-2xl font-bold text-[#2B3A54] sm:text-4xl md:text-left">
-          COSA DICONO I MIEI PAZIENTI:
-        </span>
+    <section className="mt-16 overflow-hidden py-12">
+      <h1 className="font-family-open-sans mb-8 px-8 text-center text-2xl font-bold text-[#2B3A54] sm:text-4xl lg:text-left">
+        COSA DICONO I MIEI PAZIENTI:
       </h1>
-      <div className="mx-auto w-fit border-2 border-red-500">
+      <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-4 lg:px-8 lg:pr-0">
         <a
           id="zl-url"
           className="zl-url"
@@ -30,6 +29,8 @@ const TrustBadge = () => {
         >
           Federico Benni - MioDottore.it
         </a>
+
+        <Carousel />
       </div>
     </section>
   );
