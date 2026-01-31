@@ -29,7 +29,7 @@ function Card({ image, index }: CardProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="pointer-events-none absolute h-full w-full bg-gray-500 opacity-10"></div>
+              <div className="pointer absolute h-full w-full bg-gray-500 opacity-10"></div>
               <motion.h1
                 className="font-sm hover: z-10 flex items-center gap-[0.5ch] rounded-md bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
                 initial={{ y: 10 }}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Footer from "@/app/footer/page";
 import TrustBadge from "./trustbadge/page";
+import FAQ from "./FAQ/freqaq";
 import Carousel from "@/components/ui/carousel";
 
 export default function Home() {
@@ -90,7 +91,7 @@ export default function Home() {
 
                 {/* Button text */}
                 <span className="relative z-10 text-[12px] font-medium tracking-wider">
-                  SCOPRI COME PRENOTARE UNA VISITA
+                  <a className="">SCOPRI COME PRENOTARE UNA VISITA</a>
                 </span>
 
                 {/* Arrow - hidden by default, slides in on hover */}
@@ -115,6 +116,7 @@ export default function Home() {
         </div>
       </main>
       <TrustBadge />
+      <FAQ />
       <Footer />
     </>
   );

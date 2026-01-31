@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto_Mono, Roboto_Flex, Open_Sans } from "next/font/google";
+import {
+  Roboto_Mono,
+  Roboto_Flex,
+  Open_Sans,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 
 const robotoMono = Roboto_Mono({
@@ -17,6 +22,11 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Physiotherapy & Rehabilitation",
   description:
@@ -31,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} antialiased`}
+        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${playfairDisplay.variable} antialiased`}
       >
         {children}
       </body>
