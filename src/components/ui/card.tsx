@@ -1,75 +1,53 @@
-import * as React from 'react';
+import React, { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { exit } from "process";
 
-import { cn } from '@/lib/utils';
+interface CardProps {
+  image: string;
+  index: number;
+}
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+function Card({ image, index }: CardProps) {
+  const [showOverlay, setShowOverlay] = useState(false);
   return (
-    <div
-      data-slot="card"
-      className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
-        className
-      )}
-      {...props}
-    />
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className="relative inline-block rounded-xl"
+      onHoverStart={() => setShowOverlay(true)}
+      onHoverEnd={() => setShowOverlay(false)}
+    >
+      <div className="relative inline-block overflow-hidden rounded-xl">
+        <img
+          src={image}
+          alt={image}
+          className="block h-auto w-auto max-w-full rounded-xl"
+          style={{ objectFit: "contain" }}
+        />
+        {showOverlay && (
+          <motion.div
+            className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden rounded-xl bg-black/50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="pointer-events-none absolute h-full w-full bg-gray-500 opacity-10"></div>
+            <motion.h1
+              className="font-sm hover: z-10 flex items-center gap-[0.5ch] rounded-full bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
+              initial={{ y: 10 }}
+              animate={{ y: 1 }}
+              exit={{ y: 10 }}
+            >
+              <span>Vedi La Recensione</span>
+              <ArrowRight className="h-4 w-4" />
+            </motion.h1>
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
   );
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn('leading-none font-semibold', className)}
-      {...props}
-    />
-  );
-}
-
-function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn('text-muted-foreground text-sm', className)}
-      {...props}
-    />
-  );
-}
-
-function CardAction({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn('col-start-2 row-span-2 row-start-1 self-start justify-self-end', className)}
-      {...props}
-    />
-  );
-}
-
-function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-content" className={cn('px-6', className)} {...props} />;
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn('flex items-center px-6 [.border-t]:pt-6', className)}
-      {...props}
-    />
-  );
-}
-
-export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent };
+export default Card;

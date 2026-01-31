@@ -3,6 +3,8 @@ import Navbar from "./navbar";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Footer from "@/app/footer/page";
+import TrustBadge from "./trustbadge/page";
+import Carousel from "@/components/ui/carousel";
 
 export default function Home() {
   const containerVariants = {
@@ -49,15 +51,15 @@ export default function Home() {
               animate="visible"
             >
               <motion.h1
-                className="font-family-roboto-flex text-2xl text-[#2B3A54] sm:text-4xl"
+                className="font-family-open-sans text-2xl text-[#2B3A54] sm:text-4xl"
                 variants={itemVariants}
               >
-                <span className="font-family-roboto-flex text-4xl font-medium tracking-[2px] md:text-4xl lg:text-4xl">
+                <span className="font-family-open-sans text-4xl font-extrabold md:text-4xl lg:text-4xl">
                   SCEGLI DI STARE BENE
                 </span>{" "}
               </motion.h1>
               <motion.p
-                className="font-family-roboto-mono mt-6 mb-[-50px] font-extralight text-[#2B3A54] sm:text-base md:text-base lg:mb-[-10px] lg:text-[18px]"
+                className="font-family-roboto-mono mt-6 mb-[-50px] font-extralight text-[#2B3A54] sm:text-base md:text-base lg:mb-[-10px] lg:text-[14px]"
                 variants={itemVariants}
               >
                 "Credo in una Fisioterapia fatta di dialogo, condivisione,
@@ -75,31 +77,36 @@ export default function Home() {
               />
             </motion.div>
             {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-            <motion.a
-              className="relative mt-20 inline-flex w-fit cursor-pointer items-center overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] px-20 py-4 text-white transition-colors duration-300 hover:bg-[#FFFFFF] hover:text-[#2B3A54] md:ml-20 lg:ml-20"
-              whileHover="hover"
-              initial="initial"
-              variants={{
-                initial: {},
-                hover: {},
-              }}
-            >
-              <motion.div
-                className="absolute left-0 flex items-center"
+            <motion.div className="flex flex-row justify-between gap-x-10">
+              <motion.a
+                className="mt-20 inline-flex w-fit cursor-pointer items-center overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] px-14 py-4 text-white transition-colors duration-300 hover:bg-[#FFFFFF] hover:text-[#2B3A54] md:ml-20 lg:ml-20"
+                whileHover="hover"
+                initial="initial"
                 variants={{
-                  initial: { x: -50, opacity: 0 },
-                  hover: {
-                    x: 265, // Posizione a destra del testo (approssimativa)
-                    opacity: 1,
-                  },
+                  initial: {},
+                  hover: {},
                 }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
-                <ArrowRight className="h-5 w-5" />
-              </motion.div>
-              <span className="relative z-10">PRENOTA UNA VISITA</span>
-            </motion.a>
+                <motion.div
+                  className="absolute left-0 flex items-center"
+                  variants={{
+                    initial: { x: -50, opacity: 0 },
+                    hover: {
+                      x: 265, // Posizione a destra del testo (approssimativa)
+                      opacity: 1,
+                    },
+                  }}
+                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </motion.div>
+                <span className="relative z-10">
+                  SCOPRI COME PRENOTARE UNA VISITA
+                </span>
+              </motion.a>
+            </motion.div>
           </motion.div>
+
           <motion.img
             src="/benni.jpg"
             alt="Foto di Federico Benni nella sua clinica"
@@ -110,6 +117,8 @@ export default function Home() {
           />
         </div>
       </main>
+      <TrustBadge />
+      <Carousel />
       <Footer />
     </>
   );

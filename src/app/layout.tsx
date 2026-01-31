@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto_Mono, Roboto_Flex } from "next/font/google";
+import { Roboto_Mono, Roboto_Flex, Open_Sans } from "next/font/google";
 import "./globals.css";
 
 const robotoMono = Roboto_Mono({
@@ -9,6 +9,11 @@ const robotoMono = Roboto_Mono({
 
 const robotoFlex = Roboto_Flex({
   variable: "--font-roboto-flex",
+  subsets: ["latin"],
+});
+
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
 });
 
@@ -26,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoFlex.variable} antialiased`}
+        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} antialiased`}
       >
         {children}
       </body>
