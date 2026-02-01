@@ -12,33 +12,33 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: 1,
-    question: "Come posso prenotare?",
+    question: "Come posso raggiungere lo Studio?",
     answer:
-      "Puoi prenotare una visita tramite il widget MioDottore presente sul sito, chiamando direttamente lo studio, oppure inviando un messaggio WhatsApp. Rispondo sempre entro 24 ore.",
+      "Lo Studio é raggiungibile in auto, anche per chi non ha contrassegni residenziali, non trovandosi in una zona a traffico limitato, oppure tramite numerose linee bus, che fermano proprio davanti allo Studio.",
   },
   {
     id: 2,
-    question: "Quanto dura una seduta?",
+    question: "E' necessario togliersi gli indumenti per la visita?",
     answer:
-      "Una seduta standard dura circa 50-60 minuti. La prima visita può durare fino a 75 minuti per permettere una valutazione completa e la definizione del piano terapeutico personalizzato.",
+      "Non necessariamente, ma nei casi in cui la problematica richieda una maggiore ispezione sarà richiesto di togliersi pantaloni o maglie. Se possibile, un abbigliamento comodo é consigliato, ma non necessario.",
   },
   {
     id: 3,
-    question: "Quali patologie trattate?",
+    question: "E' necessaria la prescrizione medica?",
     answer:
-      "Mi occupo di problematiche muscolo-scheletriche, dolori cervicali e lombari, recupero post-operatorio, riabilitazione sportiva, cefalee di origine cervicale e molto altro.",
+      "No, il Fisioterapista opera anche senza prescrizione Medica. Qualora la problematica lo necessiti, il Fisioterapista ha la competenza per fare screening in merito ad eventuale invio al Medico Specialista per poi attuare una presa in carico d’equipe",
   },
   {
     id: 4,
-    question: "Serve la prescrizione medica?",
+    question: "Quali sono le fasce d’età trattate?",
     answer:
-      "Per accedere privatamente non è necessaria la prescrizione medica. Tuttavia, se hai già eseguito esami diagnostici o hai una prescrizione, portali con te alla prima visita.",
+      "Tratto bambini dall’età scolare in avanti (dai 6 anni in su) fino al paziente anziano",
   },
   {
     id: 5,
-    question: "Quali sono i metodi di pagamento?",
+    question: "Il trattamento Fisioterapico é doloroso?",
     answer:
-      "Accetto pagamenti in contanti, con carta di credito/debito e bonifico bancario. Rilascio regolare fattura sanitaria che può essere utilizzata per la detrazione fiscale.",
+      "Il mio approccio manuale non é doloroso, e viene adattato a seconda della corporatura e della sensibilità al dolore del Paziente. Potrà succedere che il trattamento di alcuni distretti risulti più fastidioso, ma sempre ampiamente nei limiti della tolleranza.",
   },
 ];
 
@@ -51,10 +51,10 @@ export default function FAQ() {
 
   return (
     <section className="relative w-full py-20 md:py-28">
-      <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-12">
+      <div className="relative z-10 mr-auto ml-4 max-w-5xl md:ml-12 lg:ml-16">
         {/* Section Title */}
         <motion.h2
-          className="font-family-open-sans mb-12 text-3xl font-bold text-[#2B3A54] md:mb-16 md:text-4xl"
+          className="font-family-roboto-flex mb-12 flex items-center justify-center text-2xl font-bold text-[#2B3A54] sm:text-3xl md:mb-16 md:text-4xl lg:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -64,7 +64,7 @@ export default function FAQ() {
         </motion.h2>
 
         {/* FAQ Items */}
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-4 sm:space-y-6">
           {faqData.map((item, index) => {
             const isOpen = openId === item.id;
 
@@ -80,12 +80,12 @@ export default function FAQ() {
                 {/* Item */}
                 <button
                   onClick={() => toggleItem(item.id)}
-                  className={`flex w-full cursor-pointer items-start gap-4 text-left transition-[padding] duration-300 ease-out md:gap-6 ${
-                    isOpen ? "py-6 md:py-8" : "py-3 md:py-4"
+                  className={`flex w-full cursor-pointer items-start gap-2 text-left transition-[padding] duration-300 ease-out sm:gap-4 md:gap-6 ${
+                    isOpen ? "py-4 md:py-8" : "py-2 sm:py-3 md:py-4"
                   }`}
                 >
                   {/* Number */}
-                  <span className="font-family-open-sans mt-1 text-xs font-bold text-[#2B3A54] md:text-sm">
+                  <span className="font-family-open-sans text-xs font-light text-[#2B3A54] md:mb-2 md:text-xs lg:mb-1.5">
                     {item.id}
                   </span>
 
@@ -95,11 +95,11 @@ export default function FAQ() {
                     <div
                       className={`relative transition-[height,border] duration-300 ease-out ${
                         !isOpen
-                          ? "h-[18px] overflow-hidden border-b border-[#2B3A54]/30 md:h-[28px] lg:h-[34px]"
+                          ? "h-[12px] overflow-hidden border-b border-[#2B3A54]/30 sm:h-[16px] md:h-[28px] lg:h-[34px]"
                           : ""
                       }`}
                     >
-                      <h3 className="font-family-open-sans text-2xl leading-none font-bold tracking-tight text-[#2B3A54] md:text-4xl lg:text-5xl">
+                      <h3 className="font-family-open-sans text-base leading-none font-bold tracking-tight whitespace-nowrap text-[#2B3A54] sm:text-xl md:text-4xl lg:text-5xl">
                         {item.question}
                       </h3>
                     </div>
@@ -124,7 +124,7 @@ export default function FAQ() {
                           className="overflow-hidden will-change-[height,opacity]"
                         >
                           <motion.p
-                            className="font-family-roboto-mono mt-4 max-w-2xl pr-4 text-sm leading-relaxed text-[#2B3A54]/70 md:mt-6 md:text-base"
+                            className="font-family-roboto-mono mt-3 max-w-2xl pr-2 text-xs leading-relaxed text-[#2B3A54] sm:mt-4 sm:pr-4 sm:text-sm md:mt-6 md:text-base"
                             initial={{ y: 8, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -4, opacity: 0 }}

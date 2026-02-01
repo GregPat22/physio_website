@@ -6,6 +6,7 @@ import Footer from "@/app/footer/page";
 import TrustBadge from "./trustbadge/page";
 import FAQ from "./FAQ/freqaq";
 import Carousel from "@/components/ui/carousel";
+import TitoliDiStudio from "@/components/ui/titoli-di-studio";
 
 export default function Home() {
   const containerVariants = {
@@ -91,7 +92,7 @@ export default function Home() {
 
                 {/* Button text */}
                 <span className="relative z-10 text-[12px] font-medium tracking-wider">
-                  <a className="">SCOPRI COME PRENOTARE UNA VISITA</a>
+                  <a className="">PRENOTA UNA VISITA</a>
                 </span>
 
                 {/* Arrow - hidden by default, slides in on hover */}
@@ -103,6 +104,10 @@ export default function Home() {
                 <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.a>
             </motion.div>
+            {/* Titoli di Studio */}
+            <div className="md:ml-20 lg:ml-20">
+              <TitoliDiStudio />
+            </div>
           </motion.div>
 
           <motion.img

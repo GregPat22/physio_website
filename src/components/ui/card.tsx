@@ -15,23 +15,19 @@ function Card({ image, index }: CardProps) {
       onHoverStart={() => setShowOverlay(true)}
       onHoverEnd={() => setShowOverlay(false)}
     >
-      <motion.div className="relative flex h-auto w-[280px] items-center justify-center overflow-hidden rounded-xl bg-gray-50">
-        <img
-          src={image}
-          alt={image}
-          className="w-full rounded-xl object-contain p-2"
-        />
+      <motion.div className="relative flex h-auto w-[280px] items-center justify-center overflow-hidden bg-gray-50">
+        <img src={image} alt={image} className="w-full object-contain p-2" />
         <AnimatePresence>
           {showOverlay && (
             <motion.div
-              className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden rounded-md bg-black/50"
+              className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden bg-black/50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
               <div className="pointer absolute h-full w-full bg-gray-500 opacity-10"></div>
               <motion.h1
-                className="font-sm hover: z-10 flex items-center gap-[0.5ch] rounded-md bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
+                className="font-sm hover: z-10 flex items-center gap-[0.5ch] bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
                 initial={{ y: 10 }}
                 animate={{ y: 1 }}
                 exit={{ y: 10 }}
