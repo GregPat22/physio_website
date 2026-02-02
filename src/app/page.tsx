@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Footer from "@/app/footer/page";
 import TrustBadge from "./trustbadge/page";
 import FAQ from "./FAQ/freqaq";
-import Carousel from "@/components/ui/carousel";
+
 import TitoliDiStudio from "@/components/ui/titoli-di-studio";
 
 export default function Home() {
@@ -78,6 +78,10 @@ export default function Home() {
                 variants={itemVariants}
               />
             </motion.div>
+            {/* Titoli di Studio */}
+            <div className="md:ml-20 lg:ml-20">
+              <TitoliDiStudio />
+            </div>
             {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
             <motion.div className="flex flex-row justify-between gap-x-10">
               <motion.a
@@ -104,10 +108,6 @@ export default function Home() {
                 <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.a>
             </motion.div>
-            {/* Titoli di Studio */}
-            <div className="md:ml-20 lg:ml-20">
-              <TitoliDiStudio />
-            </div>
           </motion.div>
 
           <motion.img
