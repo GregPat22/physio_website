@@ -3,7 +3,7 @@ import {
   Roboto_Mono,
   Roboto_Flex,
   Open_Sans,
-  Playfair_Display,
+  Oranienbaum,
 } from "next/font/google";
 import "./globals.css";
 
@@ -22,9 +22,10 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
+const oranienbaum = Oranienbaum({
+  variable: "--font-oranienbaum",
   subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -41,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${playfairDisplay.variable} antialiased`}
+        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${oranienbaum.variable} antialiased`}
       >
         {children}
       </body>

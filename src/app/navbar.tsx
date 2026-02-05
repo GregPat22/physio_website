@@ -3,15 +3,30 @@ import React, { useState, useEffect } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "framer-motion";
 
+const SM_BREAKPOINT_PX = 640;
+
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [isSmOrLarger, setIsSmOrLarger] = useState(false);
+
+  useEffect(() => {
+    const checkViewport = () => {
+      setIsSmOrLarger(window.innerWidth >= SM_BREAKPOINT_PX);
+    };
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!isSmOrLarger) {
+        setIsVisible(false);
+        return;
+      }
       const scrollY = window.scrollY;
-
       if (scrollY <= 50) {
         setIsVisible(true);
       } else {
@@ -19,9 +34,10 @@ const Navbar = () => {
       }
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isSmOrLarger]);
 
   useEffect(() => {
     if (!hasAnimated) {
@@ -58,7 +74,7 @@ const Navbar = () => {
               ease: [0.4, 0, 0.2, 1],
             }}
           >
-            <h2 className="font-family-roboto-flex font-medium text-[#2B3A54]">
+            <h2 className="font-family-roboto-flex font-medium">
               Dott. Federico Benni
             </h2>
             <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-10 lg:mr-4 lg:gap-x-14">
@@ -69,7 +85,7 @@ const Navbar = () => {
               >
                 <a
                   href="/risorse"
-                  className="flex items-center hover:text-[#2B3A54]"
+                  className="flex items-center"
                 >
                   RISORSE
                   <motion.span
@@ -156,7 +172,7 @@ const Navbar = () => {
                       className={`flex items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-200 ${
                         item.isHighlighted
                           ? "bg-[#2B3A54] text-white hover:bg-[#3c5074]"
-                          : "text-[#2B3A54] hover:bg-[#2B3A54]/5"
+                          : "hover:bg-[#2B3A54]/5"
                       } ${index !== menuItems.length - 1 && !item.isHighlighted ? "border-b border-[#2B3A54]/10" : ""}`}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}

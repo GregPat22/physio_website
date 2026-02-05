@@ -54,7 +54,7 @@ export default function FAQ() {
       <div className="relative z-10 mr-auto ml-4 max-w-5xl md:ml-12 lg:ml-16">
         {/* Section Title */}
         <motion.h2
-          className="font-family-roboto-flex mb-12 flex items-center justify-center text-2xl font-bold text-[#2B3A54] sm:text-3xl md:mb-16 md:text-4xl lg:text-6xl"
+          className="font-family-roboto-flex mb-12 flex items-center justify-center text-2xl font-bold sm:text-3xl md:mb-16 md:text-4xl lg:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -85,7 +85,7 @@ export default function FAQ() {
                   }`}
                 >
                   {/* Number */}
-                  <span className="font-family-open-sans text-xs font-light text-[#2B3A54] md:mb-2 md:text-xs lg:mb-1.5">
+                  <span className="font-family-open-sans text-xs font-light md:mb-2 md:text-xs lg:mb-1.5">
                     {item.id}
                   </span>
 
@@ -99,7 +99,7 @@ export default function FAQ() {
                           : ""
                       }`}
                     >
-                      <h3 className="font-family-open-sans text-base leading-none font-bold tracking-tight whitespace-nowrap text-[#2B3A54] sm:text-xl md:text-4xl lg:text-5xl">
+                      <h3 className="font-family-open-sans text-base leading-none font-bold tracking-tight whitespace-nowrap sm:text-xl md:text-4xl lg:text-5xl">
                         {item.question}
                       </h3>
                     </div>
@@ -124,7 +124,7 @@ export default function FAQ() {
                           className="overflow-hidden will-change-[height,opacity]"
                         >
                           <motion.p
-                            className="font-family-roboto-mono mt-3 max-w-2xl pr-2 text-xs leading-relaxed text-[#2B3A54] sm:mt-4 sm:pr-4 sm:text-sm md:mt-6 md:text-base"
+                            className="font-family-roboto-mono mt-3 max-w-2xl pr-2 text-xs leading-relaxed sm:mt-4 sm:pr-4 sm:text-sm md:mt-6 md:text-base"
                             initial={{ y: 8, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -4, opacity: 0 }}
