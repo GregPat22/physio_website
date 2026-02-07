@@ -14,8 +14,8 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 1.8,
-        delayChildren: 0.2,
+        staggerChildren: 1.0,
+        delayChildren: 0.8,
       },
     },
   };
@@ -38,79 +38,70 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
-        <div className="flex flex-col items-center justify-center gap-8 pt-14 md:flex-row md:items-start md:justify-between md:gap-12 md:pt-2 lg:flex-row lg:items-start lg:justify-between lg:gap-12 lg:pt-2">
-          <motion.div
-            className="flex w-full flex-col justify-center md:mt-30 md:w-[50%] md:pl-20 lg:mt-30 lg:w-[50%] lg:pl-20"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+      <main className="">
+        <motion.div
+          className="flex flex-col border-2 border-solid border-red-500 md:mt-20 md:mr-120 md:ml-6 md:w-[60%] md:pt-2"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            className="font-family-roboto-flex lg:text-1xl text-4xl font-semibold md:text-3xl"
+            variants={itemVariants}
           >
-            <motion.div
-              className="relative flex flex-col items-start justify-center"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h1
-                className="font-family-roboto-flex lg:text-1xl text-4xl font-semibold md:text-5xl"
-                variants={itemVariants}
-              >
-                Scegli di stare bene
-              </motion.h1>
-              <motion.p
-                className="font-family-roboto-flex mt-6 mb-[-50px] font-medium sm:text-base md:text-base lg:mb-[-10px] lg:text-[14px]"
-                variants={itemVariants}
-              >
-                " Credo in una Fisioterapia fatta di dialogo, condivisione,
-                trattamento manuale ed esercizio terapeutico, per{" "}
-                <span className="font-extrabold">
-                  accompagnare le Persone a stare sempre meglio "
-                </span>
-              </motion.p>
-              <motion.img
-                src="/sign.svg"
-                alt="Firma di Federico Benni"
-                className="ml-[300px] w-[200px] md:w-[200px] lg:w-[200px]"
-                variants={itemVariants}
-              />
-            </motion.div>
-            {/* Titoli di Studio */}
-            <div className="md:ml-20 lg:ml-20">
-              <TitoliDiStudio />
-            </div>
-            {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-            <motion.div className="flex items-center justify-center">
-              <motion.a
-                href="#prenota"
-                className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] hover:shadow-xl hover:shadow-[#3c5074]/30 md:ml-20 lg:ml-20"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                {/* Subtle shine effect on hover */}
-                <span className="absolute inset-0 -translate-x-full skew-x-12 bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            Scegli di stare bene
+          </motion.h1>
+          <motion.p
+            className="font-family-roboto-flex mt-6 border-2 border-solid border-red-500 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
+            variants={itemVariants}
+          >
+            " Credo in una Fisioterapia fatta di dialogo, condivisione,
+            trattamento manuale ed esercizio terapeutico, per{" "}
+            <span className="font-extrabold">
+              accompagnare le Persone a stare sempre meglio
+            </span>{" "}
+            "
+          </motion.p>
+          <motion.img
+            src="/sign.svg"
+            alt="Firma di Federico Benni"
+            className="mt-auto self-end border-solid border-red-500 md:w-[140px] md:border-2"
+            variants={itemVariants}
+          />
+        </motion.div>
 
-                {/* Button text */}
-                <span className="relative z-10 text-[12px] font-medium tracking-wider">
-                  PRENOTA UNA VISITA
-                </span>
+        {/* Titoli di Studio */}
+        <TitoliDiStudio />
+        {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
+        <motion.div className="flex items-center justify-center">
+          <motion.a
+            href="#prenota"
+            className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] hover:shadow-xl hover:shadow-[#3c5074]/30 md:ml-20 lg:ml-20"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Subtle shine effect on hover */}
+            <span className="absolute inset-0 -translate-x-full skew-x-12 bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-                {/* Arrow - hidden by default, slides in on hover */}
-                <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-5 group-hover:opacity-100">
-                  <ArrowRight className="h-5 w-5 shrink-0" />
-                </span>
+            {/* Button text */}
+            <span className="relative z-10 text-[12px] font-medium tracking-wider">
+              PRENOTA UNA VISITA
+            </span>
 
-                {/* Animated inner border on hover */}
-                <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </motion.a>
-            </motion.div>
-          </motion.div>
-        </div>
+            {/* Arrow - hidden by default, slides in on hover */}
+            <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-5 group-hover:opacity-100">
+              <ArrowRight className="h-5 w-5 shrink-0" />
+            </span>
+
+            {/* Animated inner border on hover */}
+            <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          </motion.a>
+        </motion.div>
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="mb-8 w-full max-w-md md:absolute md:top-0 md:right-0 md:z-0 md:h-full md:w-auto md:max-w-2xl md:object-cover lg:absolute lg:top-0 lg:right-0 lg:z-0 lg:h-full lg:w-auto lg:max-w-2xl lg:object-cover"
+          className="w-full max-w-md md:absolute md:top-0 md:right-0 md:z-0 md:ml-6 md:h-full md:w-auto lg:absolute lg:top-0 lg:right-0 lg:z-0 lg:h-full lg:w-auto lg:max-w-2xl lg:object-cover"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}

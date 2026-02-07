@@ -19,32 +19,34 @@ const itemVariants = {
 const TitoliDiStudio = () => {
   return (
     <>
-      <motion.p
-        className="font-family-roboto-mono mt-10 text-sm font-light tracking-[2px] text-gray-500"
-        variants={itemVariants}
-      >
-        Laurea in Fisioterapia
-        <a href="https://corsi.unibo.it/laurea/fisioterapia" target="_blank">
-          <img
-            src="unibo.svg"
-            alt="Logo UniBO"
-            className="ml-4 inline-block h-10 w-auto"
-          />
-        </a>
-      </motion.p>
-      <motion.p
-        className="font-family-roboto-mono mt-[0.2px] text-sm font-light tracking-[2px] text-gray-500"
-        variants={itemVariants}
-      >
-        Master Universitario in Osteopatia
-        <a href="https://eominternacional.com/" target="_blank">
-          <img
-            src="eom.png"
-            alt="Logo EOM"
-            className="ml-4 inline-block h-10 w-auto"
-          />
-        </a>
-      </motion.p>
+      <motion.div className="flex w-fit flex-col border-2 border-solid border-red-500 md:mx-20 lg:ml-20">
+        <motion.p
+          className="font-family-roboto-mono mt-10 text-sm font-light tracking-[2px] text-gray-500"
+          variants={itemVariants}
+        >
+          Laurea in Fisioterapia
+          <a href="https://corsi.unibo.it/laurea/fisioterapia" target="_blank">
+            <img
+              src="unibo.svg"
+              alt="Logo UniBO"
+              className="ml-4 inline-block h-10 w-auto"
+            />
+          </a>
+        </motion.p>
+        <motion.p
+          className="font-family-roboto-mono mt-[0.2px] text-sm font-light tracking-[2px] text-gray-500"
+          variants={itemVariants}
+        >
+          Master Universitario in Osteopatia
+          <a href="https://eominternacional.com/" target="_blank">
+            <img
+              src="eom.png"
+              alt="Logo EOM"
+              className="ml-4 inline-block h-10 w-auto"
+            />
+          </a>
+        </motion.p>
+      </motion.div>
     </>
   );
 };
