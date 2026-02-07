@@ -40,19 +40,19 @@ export default function Home() {
       <Navbar />
       <main className="">
         <motion.div
-          className="flex flex-col border-2 border-solid border-red-500 md:mt-20 md:mr-120 md:ml-6 md:w-[60%] md:pt-2"
+          className="flex flex-col md:mt-20 md:mr-100 md:ml-20 md:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="font-family-roboto-flex lg:text-1xl text-4xl font-semibold md:text-3xl"
+            className="font-family-roboto-flex lg:text-1xl text-4xl font-semibold md:mb-[-4px] md:text-3xl"
             variants={itemVariants}
           >
             Scegli di stare bene
           </motion.h1>
           <motion.p
-            className="font-family-roboto-flex mt-6 border-2 border-solid border-red-500 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
+            className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
             variants={itemVariants}
           >
             " Credo in una Fisioterapia fatta di dialogo, condivisione,
@@ -65,7 +65,7 @@ export default function Home() {
           <motion.img
             src="/sign.svg"
             alt="Firma di Federico Benni"
-            className="mt-auto self-end border-solid border-red-500 md:w-[140px] md:border-2"
+            className="mt-auto self-end md:w-[140px]"
             variants={itemVariants}
           />
         </motion.div>
@@ -73,10 +73,10 @@ export default function Home() {
         {/* Titoli di Studio */}
         <TitoliDiStudio />
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-        <motion.div className="flex items-center justify-center">
+        <motion.div className="flex items-center md:ml-40">
           <motion.a
             href="#prenota"
-            className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] hover:shadow-xl hover:shadow-[#3c5074]/30 md:ml-20 lg:ml-20"
+            className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] lg:ml-20"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
@@ -93,9 +93,6 @@ export default function Home() {
             <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-5 group-hover:opacity-100">
               <ArrowRight className="h-5 w-5 shrink-0" />
             </span>
-
-            {/* Animated inner border on hover */}
-            <span className="pointer-events-none absolute inset-[3px] border border-white/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </motion.a>
         </motion.div>
         <motion.img

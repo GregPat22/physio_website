@@ -19,30 +19,30 @@ const itemVariants = {
 const TitoliDiStudio = () => {
   return (
     <>
-      <motion.div className="flex w-fit flex-col border-2 border-solid border-red-500 md:mx-20 lg:ml-20">
+      <motion.div className="flex w-fit flex-col md:mx-20 lg:ml-20">
         <motion.p
-          className="font-family-roboto-mono mt-10 text-sm font-light tracking-[2px] text-gray-500"
+          className="font-family-roboto-mono text-sm font-medium tracking-[1px] text-gray-500 md:text-[8px]"
           variants={itemVariants}
         >
-          Laurea in Fisioterapia
+          •Laurea in Fisioterapia
           <a href="https://corsi.unibo.it/laurea/fisioterapia" target="_blank">
             <img
               src="unibo.svg"
               alt="Logo UniBO"
-              className="ml-4 inline-block h-10 w-auto"
+              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[20px]"
             />
           </a>
         </motion.p>
         <motion.p
-          className="font-family-roboto-mono mt-[0.2px] text-sm font-light tracking-[2px] text-gray-500"
+          className="font-family-roboto-mono mt-[0.2px] text-sm font-medium tracking-[1px] text-gray-500 md:text-[8px]"
           variants={itemVariants}
         >
-          Master Universitario in Osteopatia
+          •Master Universitario in Osteopatia
           <a href="https://eominternacional.com/" target="_blank">
             <img
               src="eom.png"
               alt="Logo EOM"
-              className="ml-4 inline-block h-10 w-auto"
+              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[40px]"
             />
           </a>
         </motion.p>
