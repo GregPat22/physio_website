@@ -3,7 +3,7 @@ import {
   Roboto_Mono,
   Roboto_Flex,
   Open_Sans,
-  Oranienbaum,
+  Montserrat,
 } from "next/font/google";
 import "./globals.css";
 
@@ -22,10 +22,9 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
-const oranienbaum = Oranienbaum({
-  variable: "--font-oranienbaum",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${oranienbaum.variable} antialiased`}
+        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${montserrat.variable} antialiased`}
       >
         {children}
       </body>

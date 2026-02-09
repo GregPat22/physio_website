@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SM_BREAKPOINT_PX = 640;
+const SM_BREAKPOINT_PX = 240;
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -27,7 +27,7 @@ const Navbar = () => {
         return;
       }
       const scrollY = window.scrollY;
-      if (scrollY <= 50) {
+      if (scrollY <= 10) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -63,7 +63,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isVisible && (
           <motion.nav
-            className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between p-4 md:p-4 lg:p-4"
+            className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between border-b border-solid border-[#2B3A54]/10 p-4 md:p-4 lg:p-4"
             initial={
               hasAnimated ? { y: -100, opacity: 0 } : { y: -100, opacity: 0 }
             }
@@ -83,10 +83,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               >
-                <a
-                  href="/risorse"
-                  className="flex items-center"
-                >
+                <a href="/risorse" className="flex items-center">
                   RISORSE
                   <motion.span
                     className="ml-2 inline-block"

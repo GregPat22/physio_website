@@ -27,7 +27,7 @@ function Card({ image, index }: CardProps) {
             >
               <div className="pointer absolute h-full w-full bg-gray-500 opacity-10"></div>
               <motion.h1
-                className="font-sm hover: z-10 flex items-center gap-[0.5ch] bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
+                className="font-family-roboto-flex z-10 flex items-center gap-[0.5ch] bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
                 initial={{ y: 10 }}
                 animate={{ y: 1 }}
                 exit={{ y: 10 }}

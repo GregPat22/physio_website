@@ -2,9 +2,9 @@
 import Navbar from "./navbar";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Footer from "@/app/footer/page";
+
 import TrustBadge from "./trustbadge/page";
-import FAQ from "./FAQ/freqaq";
+import FAQ from "./freqaq";
 
 import TitoliDiStudio from "@/components/ui/titoli-di-studio";
 
@@ -38,21 +38,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="">
+      <main className="relative min-h-screen">
         <motion.div
-          className="flex flex-col md:mt-20 md:mr-100 md:ml-20 md:pt-2"
+          className="flex flex-col border-2 border-solid border-red-500 md:mt-20 md:mr-100 md:ml-20 md:pt-2 lg:mt-20 lg:mr-100 lg:ml-20 lg:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="font-family-roboto-flex lg:text-1xl text-4xl font-semibold md:mb-[-4px] md:text-3xl"
+            className="font-family-montserrat font-semibold md:mb-[-4px] md:text-3xl lg:mb-[-8px] lg:text-3xl"
             variants={itemVariants}
           >
             Scegli di stare bene
           </motion.h1>
           <motion.p
-            className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
+            className="font-family-roboto-flex mt-6 border-2 border-solid border-red-500 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
             variants={itemVariants}
           >
             " Credo in una Fisioterapia fatta di dialogo, condivisione,
@@ -65,7 +65,7 @@ export default function Home() {
           <motion.img
             src="/sign.svg"
             alt="Firma di Federico Benni"
-            className="mt-auto self-end md:w-[140px]"
+            className="mt-auto self-end border-solid border-red-500 md:w-[140px] md:border-2"
             variants={itemVariants}
           />
         </motion.div>
@@ -95,18 +95,18 @@ export default function Home() {
             </span>
           </motion.a>
         </motion.div>
+        {/* //////////////////////////// IMAGE //////////////////////////////////// */}
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="w-full max-w-md md:absolute md:top-0 md:right-0 md:z-0 md:ml-6 md:h-full md:w-auto lg:absolute lg:top-0 lg:right-0 lg:z-0 lg:h-full lg:w-auto lg:max-w-2xl lg:object-cover"
+          className="w-full max-w-full object-contain object-top sm:max-h-[75vh] md:absolute md:top-0 md:right-0 md:z-0 md:ml-6 md:h-screen md:w-auto md:object-contain md:object-top lg:absolute lg:top-0 lg:right-0 lg:z-0 lg:ml-6 lg:h-screen lg:w-auto lg:object-contain lg:object-top"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
         />
       </main>
       <TrustBadge />
       <FAQ />
-      <Footer />
     </>
   );
 }

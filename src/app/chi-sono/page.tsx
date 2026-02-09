@@ -2,7 +2,7 @@
 import Navbar from "../navbar";
 import { motion } from "framer-motion";
 
-export default function ChiSono() {
+export default function ChiSonoPage() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -38,19 +38,24 @@ export default function ChiSono() {
       }}
     >
       <Navbar />
-      <article className="prose prose-sm sm:prose-base lg:prose-lg mx-auto max-w-2xl p-4">
-        <h1>Chi Sono</h1>
-        <p>
+      <motion.article
+        className="prose prose-sm sm:prose-base lg:prose-lg mx-auto max-w-2xl p-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1 variants={itemVariants}>Chi Sono</motion.h1>
+        <motion.p variants={itemVariants}>
           Sono nato a Bologna nel Settembre del 1993, città in cui ho studiato e
           in cui vivo e lavoro come Fisioterapista con Master Universitario di I
-          livello in Osteopatia, iscritto all’Ordine Interprovinciale dei
+          livello in Osteopatia, iscritto all'Ordine Interprovinciale dei
           Fisioterapisti di Bologna-Ferrara con il numero 17. Sono specializzato
           nel campo Ortopedico e nella riabilitazione post-chirurgica e
           conservativa. Il mio obiettivo è integrare competenze manuali,
           esercizio e relazione terapeutica in modo coerente e personalizzato
           per far vivere meglio, e senza dolore, le Persone. Mi sono diplomato
           al Liceo Classico Marco Minghetti per poi laurearmi con lode in
-          Fisioterapia nel 2016 presso l’Alma Mater Studiorum di Bologna, dopo
+          Fisioterapia nel 2016 presso l'Alma Mater Studiorum di Bologna, dopo
           un percorso formativo svolto tra aule universitarie, reparti
           ospedalieri e strutture ambulatoriali. Ho sempre vissuto la laurea non
           come un traguardo, ma come un punto di partenza. Subito dopo ho
@@ -65,7 +70,7 @@ export default function ChiSono() {
           tendini e articolazioni. Una Persona è tanto altro: porta con sé
           emozioni, paure, credenze ed esperienze che influenzano profondamente
           il dolore e il recupero. Per questo mi sono specializzato nelle
-          Neuroscienze del Dolore Cronico, seguendo l’evidenza scientifica
+          Neuroscienze del Dolore Cronico, seguendo l'evidenza scientifica
           internazionale con esperti quali Nijs, Van Wilgen, Moseley e altri, e
           integrando costantemente studio e pratica clinica. Un aspetto centrale
           del mio lavoro è la comunicazione: credo che il Paziente debba
@@ -73,17 +78,17 @@ export default function ChiSono() {
           maggiore consapevolezza e meno timori. La passione per lo sport mi ha
           portato a lavorare come fisioterapista anche in ambito sportivo, nella
           pallavolo (Serie C e B1, 2016–2018) ma anche con svariati podisti,
-          calciatori e giocatori di pallacanestro. Considero l’esercizio
+          calciatori e giocatori di pallacanestro. Considero l'esercizio
           terapeutico uno strumento fondamentale: gli esercizi devono essere
-          mirati e adattàti alla persona, con l’obiettivo di recuperare fiducia
+          mirati e adattàti alla persona, con l'obiettivo di recuperare fiducia
           nel movimento in modo sicuro e graduale. Mi occupo infine di
           riabilitazione Oncologica, accompagnando le persone nel recupero
-          dell’autonomia e nel miglioramento della qualità di vita. Ricevo su
+          dell'autonomia e nel miglioramento della qualità di vita. Ricevo su
           appuntamento presso il Poliambulatorio MG, in via Irnerio 53 a
           Bologna, e mi occupo anche di Fisioterapia a domicilio nel centro di
           Bologna e vicinanze.
-        </p>
-      </article>
+        </motion.p>
+      </motion.article>
     </main>
   );
 }
