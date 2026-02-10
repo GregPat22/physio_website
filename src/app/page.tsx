@@ -38,21 +38,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-screen">
+      <main className="min-h-screen">
         <motion.div
-          className="flex flex-col border-2 border-solid border-red-500 md:mt-20 md:mr-100 md:ml-20 md:pt-2 lg:mt-20 lg:mr-100 lg:ml-20 lg:pt-2"
+          className="flex flex-col md:mt-20 md:mr-10 md:ml-20 md:pt-12 lg:mt-30 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="font-family-montserrat font-semibold md:mb-[-4px] md:text-3xl lg:mb-[-8px] lg:text-3xl"
+            className="font-family-montserrat font-semibold md:mb-[-4px] md:text-3xl lg:mb-[-8px] lg:text-5xl"
             variants={itemVariants}
           >
             Scegli di stare bene
           </motion.h1>
           <motion.p
-            className="font-family-roboto-flex mt-6 border-2 border-solid border-red-500 font-light sm:text-base md:text-base md:text-[12px] lg:text-[14px]"
+            className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-base md:text-[12px] lg:text-[20px]"
             variants={itemVariants}
           >
             " Credo in una Fisioterapia fatta di dialogo, condivisione,
@@ -65,18 +65,19 @@ export default function Home() {
           <motion.img
             src="/sign.svg"
             alt="Firma di Federico Benni"
-            className="mt-auto self-end border-solid border-red-500 md:w-[140px] md:border-2"
+            className="mt-auto self-end md:w-[140px] lg:w-[200px]"
             variants={itemVariants}
           />
         </motion.div>
+        {/* //////////////////////////// IMAGE //////////////////////////////////// */}
 
         {/* Titoli di Studio */}
         <TitoliDiStudio />
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-        <motion.div className="flex items-center md:ml-40">
+        <motion.div className="mt-20 flex items-center justify-end md:ml-40 md:justify-start lg:mt-16">
           <motion.a
             href="#prenota"
-            className="group relative mt-20 inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-4 pr-10 pl-10 text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-3 hover:bg-white hover:pr-8 hover:text-[#2B3A54] lg:ml-20"
+            className="group relative inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-2.5 pr-5 pl-5 text-[10px] font-medium tracking-wider text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-2 hover:bg-white hover:pr-4 hover:text-[#2B3A54] md:py-4 md:pr-10 md:pl-10 md:text-[12px] md:hover:gap-3 md:hover:pr-8 lg:ml-20 lg:py-5 lg:pr-14 lg:pl-14 lg:text-[15px] lg:hover:pr-12"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
@@ -85,21 +86,18 @@ export default function Home() {
             <span className="absolute inset-0 -translate-x-full skew-x-12 bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
             {/* Button text */}
-            <span className="relative z-10 text-[12px] font-medium tracking-wider">
-              PRENOTA UNA VISITA
-            </span>
+            <span className="relative z-10">PRENOTA UNA VISITA</span>
 
             {/* Arrow - hidden by default, slides in on hover */}
-            <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-5 group-hover:opacity-100">
-              <ArrowRight className="h-5 w-5 shrink-0" />
+            <span className="relative z-10 flex w-0 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:w-4 group-hover:opacity-100 md:group-hover:w-5">
+              <ArrowRight className="h-4 w-4 shrink-0 md:h-5 md:w-5" />
             </span>
           </motion.a>
         </motion.div>
-        {/* //////////////////////////// IMAGE //////////////////////////////////// */}
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="w-full max-w-full object-contain object-top sm:max-h-[75vh] md:absolute md:top-0 md:right-0 md:z-0 md:ml-6 md:h-screen md:w-auto md:object-contain md:object-top lg:absolute lg:top-0 lg:right-0 lg:z-0 lg:ml-6 lg:h-screen lg:w-auto lg:object-contain lg:object-top"
+          className="absolute top-0 right-0 w-auto sm:ml-20 sm:h-[400px] md:ml-40 md:h-[623px] lg:ml-60 lg:h-[623px] lg:w-auto"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}

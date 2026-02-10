@@ -19,9 +19,9 @@ const itemVariants = {
 const TitoliDiStudio = () => {
   return (
     <>
-      <motion.div className="flex w-fit flex-col border-2 border-solid border-red-500 md:mx-20 lg:ml-20">
+      <motion.div className="flex w-fit flex-col md:mx-20 lg:ml-20">
         <motion.p
-          className="font-family-roboto-mono mb-1 text-sm font-medium tracking-[1px] text-gray-500 md:text-[12px]"
+          className="font-family-roboto-mono mb-1 text-sm font-medium tracking-[1px] text-gray-500 md:text-[12px] lg:text-[20px]"
           variants={itemVariants}
         >
           •Laurea in Fisioterapia
@@ -29,12 +29,12 @@ const TitoliDiStudio = () => {
             <img
               src="unibo.svg"
               alt="Logo UniBO"
-              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[20px]"
+              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[20px] lg:h-[40px] lg:w-[40px]"
             />
           </a>
         </motion.p>
         <motion.p
-          className="font-family-roboto-mono mt-[0.2px] text-sm font-medium tracking-[1px] text-gray-500 md:text-[12px]"
+          className="font-family-roboto-mono mt-[0.2px] text-sm font-medium tracking-[1px] text-gray-500 md:text-[12px] lg:text-[20px]"
           variants={itemVariants}
         >
           •Master Universitario in Osteopatia
@@ -42,7 +42,7 @@ const TitoliDiStudio = () => {
             <img
               src="eom.png"
               alt="Logo EOM"
-              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[40px]"
+              className="ml-2 inline-block h-10 w-auto md:h-[20px] md:w-[40px] lg:h-[30px] lg:w-[60px]"
             />
           </a>
         </motion.p>
