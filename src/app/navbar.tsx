@@ -74,12 +74,20 @@ const Navbar = () => {
               ease: [0.4, 0, 0.2, 1],
             }}
           >
-            <h2 className="font-family-roboto-flex font-medium">
-              Dott. Federico Benni
-            </h2>
-            <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-10 lg:mr-4 lg:gap-x-14">
+            <div className="flex items-center gap-3">
+              <img
+                src="/Logo_plain.png"
+                alt="Logo Dott. Federico Benni"
+                className="h-[30px] w-[30px] object-contain"
+                style={{ mixBlendMode: "lighten" }}
+              />
+              <h2 className="font-family-roboto-flex font-medium">
+                Dott. Federico Benni
+              </h2>
+            </div>
+            <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-14 lg:mr-4 lg:gap-x-14">
               <motion.li
-                className="flex items-center text-[10px] font-light tracking-[1px] md:text-[9px] lg:text-[10px]"
+                className="flex items-center text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               >
@@ -94,12 +102,12 @@ const Navbar = () => {
                   </motion.span>
                 </a>
               </motion.li>
-              <li className="text-[10px] font-light tracking-[1px] md:text-[9px] lg:text-[10px]">
+              <li className="text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]">
                 <a href="/contatti" className="hover:underline">
                   CONTATTI
                 </a>
               </li>
-              <li className="text-[10px] font-light tracking-[1px] md:text-[9px] lg:text-[10px]">
+              <li className="text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]">
                 <a
                   href="/chi-sono"
                   className="group relative block rounded-tl-lg px-4 py-2 font-light text-white md:px-3 md:py-1.5 lg:px-4 lg:py-2"

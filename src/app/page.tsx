@@ -40,19 +40,19 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <motion.div
-          className="flex flex-col md:mt-20 md:mr-10 md:ml-20 md:pt-12 lg:mt-30 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
+          className="flex flex-col md:mt-20 md:mr-120 md:ml-20 md:max-w-[700px] md:pt-2 lg:mt-30 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="font-family-montserrat font-semibold md:mb-[-4px] md:text-3xl lg:mb-[-8px] lg:text-5xl"
+            className="font-family-montserrat font-semibold md:mb-[-8px] md:text-4xl lg:mb-[-8px] lg:text-5xl"
             variants={itemVariants}
           >
             Scegli di stare bene
           </motion.h1>
           <motion.p
-            className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-base md:text-[12px] lg:text-[20px]"
+            className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-[16px] lg:text-[20px]"
             variants={itemVariants}
           >
             " Credo in una Fisioterapia fatta di dialogo, condivisione,
@@ -65,7 +65,7 @@ export default function Home() {
           <motion.img
             src="/sign.svg"
             alt="Firma di Federico Benni"
-            className="mt-auto self-end md:w-[140px] lg:w-[200px]"
+            className="mt-auto self-end md:w-[125px] lg:w-[200px]"
             variants={itemVariants}
           />
         </motion.div>
@@ -97,7 +97,7 @@ export default function Home() {
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="absolute top-0 right-0 w-auto sm:ml-20 sm:h-[400px] md:ml-40 md:h-[623px] lg:ml-60 lg:h-[623px] lg:w-auto"
+          className="absolute top-0 right-0 w-auto sm:ml-20 sm:h-[400px] md:h-[650px] md:w-auto lg:h-[650px] lg:w-auto"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
