@@ -19,9 +19,9 @@ const itemVariants = {
 const TitoliDiStudio = () => {
   return (
     <>
-      <motion.div className="flex w-fit flex-col md:mx-20 md:mr-120 lg:mr-120 lg:ml-20">
+      <motion.div className="flex w-fit flex-col md:mr-120 md:ml-20 lg:mr-120 lg:ml-20">
         <motion.p
-          className="font-family-roboto-mono mb-1 text-sm font-medium tracking-[1px] text-gray-500 md:text-[16px] lg:text-[20px]"
+          className="font-family-roboto-mono mb-1 text-sm font-medium tracking-[1px] text-gray-500 md:text-[14px] lg:text-[20px]"
           variants={itemVariants}
         >
           •Laurea in Fisioterapia
@@ -34,7 +34,7 @@ const TitoliDiStudio = () => {
           </a>
         </motion.p>
         <motion.p
-          className="font-family-roboto-mono mt-[0.2px] text-sm font-medium tracking-[1px] text-gray-500 md:text-[16px] lg:text-[20px]"
+          className="font-family-roboto-mono mt-[0.2px] text-sm font-medium tracking-[1px] text-gray-500 md:text-[14px] lg:text-[20px]"
           variants={itemVariants}
         >
           •Master Universitario in Osteopatia

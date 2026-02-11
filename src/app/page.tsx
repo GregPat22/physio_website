@@ -3,7 +3,7 @@ import Navbar from "./navbar";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-import TrustBadge from "./trustbadge/page";
+import TrustBadge from "./trustbadge";
 import FAQ from "./freqaq";
 
 import TitoliDiStudio from "@/components/ui/titoli-di-studio";
@@ -38,9 +38,9 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="">
         <motion.div
-          className="flex flex-col md:mt-20 md:mr-120 md:ml-20 md:max-w-[700px] md:pt-2 lg:mt-30 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
+          className="flex flex-col md:mt-20 md:mr-120 md:ml-20 md:max-w-[700px] md:pt-2 lg:mt-20 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -74,7 +74,7 @@ export default function Home() {
         {/* Titoli di Studio */}
         <TitoliDiStudio />
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-        <motion.div className="mt-20 flex items-center justify-end md:ml-40 md:justify-start lg:mt-16">
+        <motion.div className="mt-20 flex items-center justify-end md:mt-12 md:ml-40 md:justify-start lg:mt-16">
           <motion.a
             href="#prenota"
             className="group relative inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-2.5 pr-5 pl-5 text-[10px] font-medium tracking-wider text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-2 hover:bg-white hover:pr-4 hover:text-[#2B3A54] md:py-4 md:pr-10 md:pl-10 md:text-[12px] md:hover:gap-3 md:hover:pr-8 lg:ml-20 lg:py-5 lg:pr-14 lg:pl-14 lg:text-[15px] lg:hover:pr-12"
@@ -97,7 +97,7 @@ export default function Home() {
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="absolute top-0 right-0 w-auto sm:ml-20 sm:h-[400px] md:h-[650px] md:w-auto lg:h-[650px] lg:w-auto"
+          className="w-auto sm:ml-20 sm:h-[400px] md:absolute md:top-0 md:right-0 md:h-[600px] md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-[625px] lg:w-auto"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
