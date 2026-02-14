@@ -46,10 +46,13 @@ export default function Home() {
           animate="visible"
         >
           <motion.h1
-            className="font-family-montserrat text-3xl font-semibold md:mb-[-8px] md:text-4xl lg:mb-[-8px] lg:text-5xl"
+            className="font-family-roboto-flex text-2xl font-semibold tracking-[-1px] md:mb-[-8px] md:text-4xl lg:mb-[-8px] lg:text-5xl"
             variants={itemVariants}
           >
-            Scegli di stare bene
+            Scegli di{"   "}
+            <span className="font-family-libre-bodoni text-2xl font-extrabold italic md:text-4xl lg:text-6xl">
+              stare bene
+            </span>
           </motion.h1>
           <motion.p
             className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-[16px] lg:text-[20px]"
@@ -74,7 +77,7 @@ export default function Home() {
         {/* Titoli di Studio */}
         <TitoliDiStudio />
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-        <motion.div className="mt-20 mb-20 flex items-center justify-center md:mt-12 md:ml-20 md:justify-start lg:mt-16">
+        <motion.div className="mb-20 flex items-center justify-center md:mt-12 md:ml-40 md:justify-start lg:mt-16">
           <motion.a
             href="#prenota"
             className="group 4 relative inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] px-5 py-4 text-[15px] font-medium tracking-wider text-white transition-all duration-300 hover:gap-2 hover:bg-white hover:pr-4 hover:text-[#2B3A54] md:py-4 md:pr-10 md:pl-10 md:text-[12px] md:hover:gap-3 md:hover:pr-8 lg:ml-20 lg:py-5 lg:pr-14 lg:pl-14 lg:text-[15px] lg:hover:pr-12"
@@ -97,7 +100,7 @@ export default function Home() {
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="w-auto sm:ml-20 sm:h-[400px] md:absolute md:top-0 md:right-0 md:h-[600px] md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-[625px] lg:w-auto"
+          className="h-auto w-auto md:absolute md:top-0 md:right-0 md:h-[600px] md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-[625px] lg:w-auto"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}

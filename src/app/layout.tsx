@@ -5,7 +5,34 @@ import {
   Open_Sans,
   Montserrat,
 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
+const libreBodoni = localFont({
+  src: [
+    {
+      path: "../fonts/libre-bodoni/LibreBodoni-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/libre-bodoni/LibreBodoni-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/libre-bodoni/LibreBodoni-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/libre-bodoni/LibreBodoni-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-libre-bodoni",
+});
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
@@ -41,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${montserrat.variable} antialiased`}
+        className={`${libreBodoni.variable} ${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${montserrat.variable} antialiased min-h-screen bg-[url('/BG-Color.jpg')] bg-cover bg-center bg-fixed bg-no-repeat`}
       >
         {children}
       </body>

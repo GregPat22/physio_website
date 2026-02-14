@@ -42,7 +42,7 @@ const TitoliDiStudio = () => {
             <img
               src="eom.png"
               alt="Logo EOM"
-              className="ml-2 inline-block h-8 w-auto md:h-[20px] md:w-[40px] lg:h-[30px] lg:w-[60px]"
+              className="ml-2 inline-block h-8 w-auto md:h-[20px] md:w-[40px] lg:h-[40px] lg:w-[80px]"
             />
           </a>
         </motion.p>
