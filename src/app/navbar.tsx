@@ -3,31 +3,29 @@ import React, { useState, useEffect } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SM_BREAKPOINT_PX = 240;
+/** Tailwind "sm" breakpoint: below this width, show menu icon instead of full navbar */
+const SM_BREAKPOINT_PX = 640;
+
+const SCROLL_THRESHOLD_PX = 10;
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [isSmOrLarger, setIsSmOrLarger] = useState(false);
-
-  useEffect(() => {
-    const checkViewport = () => {
-      setIsSmOrLarger(window.innerWidth >= SM_BREAKPOINT_PX);
-    };
-    checkViewport();
-    window.addEventListener("resize", checkViewport);
-    return () => window.removeEventListener("resize", checkViewport);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!isSmOrLarger) {
+      const isWide = window.innerWidth >= SM_BREAKPOINT_PX;
+      const scrollY = window.scrollY;
+      const scrolled = scrollY > SCROLL_THRESHOLD_PX;
+      setIsScrolled(scrolled);
+
+      if (!isWide) {
         setIsVisible(false);
         return;
       }
-      const scrollY = window.scrollY;
-      if (scrollY <= 10) {
+      if (scrollY <= SCROLL_THRESHOLD_PX) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -36,8 +34,12 @@ const Navbar = () => {
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isSmOrLarger]);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!hasAnimated) {
@@ -122,43 +124,67 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Minimalist Menu Icon - Always visible when navbar is hidden */}
+      {/* Minimalist bar when navbar is hidden: logo+text animate/hide on scroll; icon always visible */}
       <AnimatePresence>
         {!isVisible && (
           <motion.div
-            className="fixed top-0 right-0 z-50"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+            className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between p-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           >
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="group relative m-4 flex h-10 w-10 items-center justify-center border border-[#2B3A54]/20 bg-white/90 backdrop-blur-sm transition-all duration-300 hover:border-[#2B3A54]/40 hover:bg-white"
-              aria-label="Menu"
-            >
-              <div className="flex flex-col items-center justify-center gap-[5px]">
-                <motion.span
-                  className="block h-[1.5px] w-5 bg-[#2B3A54]"
-                  animate={
-                    isMenuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block h-[1.5px] w-5 bg-[#2B3A54]"
-                  animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block h-[1.5px] w-5 bg-[#2B3A54]"
-                  animate={
-                    isMenuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.2 }}
-                />
-              </div>
-            </button>
+            {/* Logo + text: animate and hide on scroll only */}
+            <AnimatePresence>
+              {!isScrolled && (
+                <motion.div
+                  className="flex items-center gap-3"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <img
+                    src="/Logo_plain.png"
+                    alt="Logo Dott. Federico Benni"
+                    className="h-[30px] w-[30px] object-contain"
+                    style={{ mixBlendMode: "lighten" }}
+                  />
+                  <h2 className="font-family-roboto-flex font-medium text-[#2B3A54]">
+                    Dott. Federico Benni
+                  </h2>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <div className="ml-auto">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="group relative flex h-10 w-10 items-center justify-center border border-[#2B3A54]/20 bg-white/90 backdrop-blur-sm transition-all duration-300 hover:border-[#2B3A54]/40 hover:bg-white"
+                aria-label="Menu"
+              >
+                <div className="flex flex-col items-center justify-center gap-[5px]">
+                  <motion.span
+                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
+                    animate={
+                      isMenuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }
+                    }
+                    transition={{ duration: 0.2 }}
+                  />
+                  <motion.span
+                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
+                    animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                  <motion.span
+                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
+                    animate={
+                      isMenuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }
+                    }
+                    transition={{ duration: 0.2 }}
+                  />
+                </div>
+              </button>
+            </div>
 
             {/* Dropdown Menu */}
             <AnimatePresence>

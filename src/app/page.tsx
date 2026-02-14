@@ -40,13 +40,13 @@ export default function Home() {
       <Navbar />
       <main className="">
         <motion.div
-          className="flex flex-col md:mt-20 md:mr-120 md:ml-20 md:max-w-[700px] md:pt-2 lg:mt-20 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
+          className="mx-8 mt-30 flex flex-col md:mt-20 md:mr-120 md:ml-20 md:max-w-[700px] md:pt-2 lg:mt-20 lg:mr-120 lg:ml-20 lg:max-w-[700px] lg:pt-2"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="font-family-montserrat font-semibold md:mb-[-8px] md:text-4xl lg:mb-[-8px] lg:text-5xl"
+            className="font-family-montserrat text-3xl font-semibold md:mb-[-8px] md:text-4xl lg:mb-[-8px] lg:text-5xl"
             variants={itemVariants}
           >
             Scegli di stare bene
@@ -65,7 +65,7 @@ export default function Home() {
           <motion.img
             src="/sign.svg"
             alt="Firma di Federico Benni"
-            className="mt-auto self-end md:w-[125px] lg:w-[200px]"
+            className="mt-auto w-[100px] self-end md:w-[125px] lg:w-[200px]"
             variants={itemVariants}
           />
         </motion.div>
@@ -74,10 +74,10 @@ export default function Home() {
         {/* Titoli di Studio */}
         <TitoliDiStudio />
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
-        <motion.div className="mt-20 flex items-center justify-end md:mt-12 md:ml-20 md:justify-start lg:mt-16">
+        <motion.div className="mt-20 mb-20 flex items-center justify-center md:mt-12 md:ml-20 md:justify-start lg:mt-16">
           <motion.a
             href="#prenota"
-            className="group relative inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] py-2.5 pr-5 pl-5 text-[10px] font-medium tracking-wider text-white shadow-lg shadow-[#3c5074]/25 transition-all duration-300 hover:gap-2 hover:bg-white hover:pr-4 hover:text-[#2B3A54] md:py-4 md:pr-10 md:pl-10 md:text-[12px] md:hover:gap-3 md:hover:pr-8 lg:ml-20 lg:py-5 lg:pr-14 lg:pl-14 lg:text-[15px] lg:hover:pr-12"
+            className="group 4 relative inline-flex w-fit cursor-pointer items-center gap-0 overflow-hidden border-2 border-solid border-[#3c5074] bg-[#3c5074] px-5 py-4 text-[15px] font-medium tracking-wider text-white transition-all duration-300 hover:gap-2 hover:bg-white hover:pr-4 hover:text-[#2B3A54] md:py-4 md:pr-10 md:pl-10 md:text-[12px] md:hover:gap-3 md:hover:pr-8 lg:ml-20 lg:py-5 lg:pr-14 lg:pl-14 lg:text-[15px] lg:hover:pr-12"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
