@@ -26,15 +26,18 @@ function Card({ image, index }: CardProps) {
               exit={{ opacity: 0 }}
             >
               <div className="pointer absolute h-full w-full bg-gray-500 opacity-10"></div>
-              <motion.h1
-                className="font-family-roboto-flex z-10 flex items-center gap-[0.5ch] bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
+              <motion.a
+                href="https://www.miodottore.it/federico-benni/fisioterapista/bologna"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="font-family-roboto-flex z-10 flex cursor-pointer items-center gap-[0.5ch] bg-white px-3 py-2 text-sm font-semibold hover:opacity-50"
                 initial={{ y: 10 }}
                 animate={{ y: 1 }}
                 exit={{ y: 10 }}
               >
                 <span>Vedi Altre Recensioni</span>
                 <ArrowRight className="h-4 w-4" />
-              </motion.h1>
+              </motion.a>
             </motion.div>
           )}
         </AnimatePresence>

@@ -51,10 +51,9 @@ export default function FAQ() {
 
   return (
     <section className="relative w-full py-20 md:py-28">
-      <div className="relative z-10 mr-auto ml-4 max-w-5xl md:ml-12 lg:ml-16">
-        {/* Section Title */}
+      <motion.div className="flex flex-col items-center">
         <motion.h2
-          className="font-family-roboto-flex mb-12 flex items-center justify-center text-2xl font-bold sm:text-3xl md:mb-16 md:text-4xl lg:text-6xl"
+          className="font-family-roboto-flex px-8 text-center text-2xl font-bold sm:text-3xl md:text-4xl lg:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -62,9 +61,13 @@ export default function FAQ() {
         >
           Domande Frequenti
         </motion.h2>
-
+        <motion.p className="font-family-open-sans mb-8 px-8 text-center text-sm font-light">
+          Le domande più frequenti prima di una visita nel mio Studio
+        </motion.p>
+      </motion.div>
+      <div className="relative z-10 mx-auto max-w-5xl pr-4 pl-8 sm:pr-6 sm:pl-10 md:pr-8 md:pl-12 lg:px-12">
         {/* FAQ Items */}
-        <div className="flex flex-col space-y-4 sm:space-y-6">
+        <div className="flex flex-col justify-center">
           {faqData.map((item, index) => {
             const isOpen = openId === item.id;
 
@@ -90,16 +93,16 @@ export default function FAQ() {
                   </span>
 
                   {/* Content */}
-                  <div className="flex-1">
+                  <div className="">
                     {/* Question with clip effect for closed items */}
                     <div
-                      className={`relative transition-[height,border] duration-300 ease-out ${
+                      className={`relative transition-[height,border] duration-800 ease-out ${
                         !isOpen
-                          ? "h-[12px] overflow-hidden border-b border-[#2B3A54]/30 sm:h-[16px] md:h-[28px] lg:h-[34px]"
-                          : ""
+                          ? "h-[11px] max-w-fit overflow-hidden border-b border-[#2B3A54]/30 sm:h-[12px] md:h-[14px] lg:h-[18px]"
+                          : "max-w-fit"
                       }`}
                     >
-                      <h3 className="font-family-open-sans text-base leading-none font-bold tracking-tight whitespace-nowrap sm:text-xl md:text-4xl lg:text-5xl">
+                      <h3 className="font-family-open-sans text-sm leading-none font-bold tracking-tight whitespace-nowrap sm:text-base md:text-lg lg:text-2xl">
                         {item.question}
                       </h3>
                     </div>
@@ -121,7 +124,7 @@ export default function FAQ() {
                               ease: "easeOut",
                             },
                           }}
-                          className="overflow-hidden will-change-[height,opacity]"
+                          className="max-w-fit overflow-hidden will-change-[height,opacity]"
                         >
                           <motion.p
                             className="font-family-roboto-mono mt-3 max-w-2xl pr-2 text-xs leading-relaxed sm:mt-4 sm:pr-4 sm:text-sm md:mt-6 md:text-base"

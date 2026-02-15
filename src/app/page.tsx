@@ -75,7 +75,14 @@ export default function Home() {
         {/* //////////////////////////// IMAGE //////////////////////////////////// */}
 
         {/* Titoli di Studio */}
-        <TitoliDiStudio />
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 12.8 }}
+        >
+          <TitoliDiStudio />
+        </motion.div>
         {/* //////////////////////////// BUTTON PRENOTA UNA VISITA //////////////////////////////////// */}
         <motion.div className="mb-20 flex items-center justify-center md:mt-12 md:ml-40 md:justify-start lg:mt-16">
           <motion.a

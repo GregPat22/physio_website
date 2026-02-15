@@ -68,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${libreBodoni.variable} ${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${montserrat.variable} antialiased min-h-screen bg-[url('/BG-Color.jpg')] bg-cover bg-center bg-fixed bg-no-repeat`}
+        className={`${libreBodoni.variable} ${robotoMono.variable} ${robotoFlex.variable} ${openSans.variable} ${montserrat.variable} min-h-screen bg-[url('/BG-Color.jpg')] bg-cover bg-fixed bg-center bg-no-repeat antialiased`}
       >
         {children}
       </body>
