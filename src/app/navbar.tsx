@@ -76,7 +76,11 @@ const Navbar = () => {
               ease: [0.4, 0, 0.2, 1],
             }}
           >
-            <div className="flex items-center gap-3">
+            <a
+              href="/"
+              className="flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-90"
+              aria-label="Vai alla home"
+            >
               <img
                 src="/Logo_plain.png"
                 alt="Logo Dott. Federico Benni"
@@ -86,7 +90,7 @@ const Navbar = () => {
               <h2 className="font-family-roboto-flex font-medium">
                 Dott. Federico Benni
               </h2>
-            </div>
+            </a>
             <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-14 lg:mr-4 lg:gap-x-14">
               <motion.li
                 className="flex items-center text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]"
@@ -137,8 +141,10 @@ const Navbar = () => {
             {/* Logo + text: animate and hide on scroll only */}
             <AnimatePresence>
               {!isScrolled && (
-                <motion.div
-                  className="flex items-center gap-3"
+                <motion.a
+                  href="/"
+                  className="flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-90"
+                  aria-label="Vai alla home"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
@@ -153,7 +159,7 @@ const Navbar = () => {
                   <h2 className="font-family-roboto-flex font-medium text-[#2B3A54]">
                     Dott. Federico Benni
                   </h2>
-                </motion.div>
+                </motion.a>
               )}
             </AnimatePresence>
             <div className="ml-auto">
@@ -178,7 +184,9 @@ const Navbar = () => {
                   <motion.span
                     className="block h-[1.5px] w-5 bg-[#2B3A54]"
                     animate={
-                      isMenuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }
+                      isMenuOpen
+                        ? { rotate: -45, y: -6.5 }
+                        : { rotate: 0, y: 0 }
                     }
                     transition={{ duration: 0.2 }}
                   />

@@ -85,7 +85,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 
 ### File Principali da Modificare
 
-`**src/app/page.tsx**`
+`**src/app/page.tsx`
 
 - Modificare hero section: cambiare headline da "Dott. Federico Benni" a value proposition orientata al beneficio (es: "Liberati dal Dolore senza Farmaci")
 - Aggiungere sub-headline con valore chiaro
@@ -94,7 +94,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 - Integrare tutte le nuove sezioni nell'ordine ottimale
 - Mantenere animazioni esistenti con framer-motion
 
-`**src/app/footer/page.tsx**`
+`**src/app/footer/page.tsx`
 
 - Aggiungere informazioni di contatto complete (telefono, email, indirizzo)
 - Aggiungere orari di apertura
@@ -104,14 +104,14 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 
 ### Nuovi Componenti da Creare
 
-`**src/components/sections/TrustBadges.tsx**`
+`**src/components/sections/TrustBadges.tsx`
 
 - Barra orizzontale con badge di fiducia
 - Statistiche: "500+ pazienti", "10+ anni esperienza", "98% soddisfazione"
 - Badge certificazioni: "Certificato", "Laureato UniBO", "Master EOM"
 - Design minimale, sopra la fold
 
-`**src/components/sections/PainPoints.tsx**`
+`**src/components/sections/PainPoints.tsx`
 
 - Headline: "Stai vivendo uno di questi problemi?"
 - Lista di pain points comuni:
@@ -122,7 +122,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
   - Dipendenza da farmaci antinfiammatori
 - Design con icone, layout a griglia responsive
 
-`**src/components/sections/Benefits.tsx**`
+`**src/components/sections/Benefits.tsx`
 
 - Headline: "Come risolviamo il tuo problema"
 - 3-4 card con benefici principali:
@@ -133,7 +133,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 - Usare componente Card esistente da `src/components/ui/card.tsx`
 - Icone da lucide-react
 
-`**src/components/sections/Process.tsx**`
+`**src/components/sections/Process.tsx`
 
 - Headline: "Il percorso in 3 step"
 - Step 1: Valutazione iniziale completa
@@ -142,7 +142,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 - Design con numeri/icone e descrizioni
 - Layout orizzontale su desktop, verticale su mobile
 
-`**src/components/sections/Testimonials.tsx**`
+`**src/components/sections/Testimonials.tsx`
 
 - Headline: "Cosa dicono i nostri pazienti"
 - 3-4 testimonianze con:
@@ -153,7 +153,7 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 - Layout a griglia responsive
 - Animazioni al scroll con framer-motion
 
-`**src/components/sections/FAQ.tsx**`
+`**src/components/sections/FAQ.tsx`
 
 - Headline: "Domande Frequenti"
 - Accordion con domande comuni:
@@ -166,14 +166,14 @@ Trasformare la landing page attuale in una struttura completa ottimizzata per ma
 - Usare componente Dialog o Sheet da shadcn/ui per accordion
 - O creare componente accordion custom con framer-motion
 
-`**src/components/sections/Urgency.tsx**`
+`**src/components/sections/Urgency.tsx`
 
 - Banner con messaggio di urgenza/scarsità
 - Esempi: "Solo 3 posti disponibili questa settimana" o "Prenota entro [data] e ottieni [beneficio]"
 - Design prominente con colore contrastato
 - CTA integrato
 
-`**src/components/sections/FinalCTA.tsx**`
+`**src/components/sections/FinalCTA.tsx`
 
 - Sezione CTA finale prima del footer
 - Headline: "Pronto a liberarti dal dolore?"
