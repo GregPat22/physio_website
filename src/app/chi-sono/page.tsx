@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "../navbar";
-import { motion } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
+import { useScroll } from "framer-motion";
 
 export default function ChiSonoPage() {
   const containerVariants = {
@@ -29,15 +30,16 @@ export default function ChiSonoPage() {
     },
   };
 
+  const { scrollYProgress } = useScroll();
+
   return (
-    <main>
+    <>
       <Navbar />
-      <motion.article
-        className="m-20 mx-auto max-w-2xl p-4"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <motion.div
+        className="origin-x-0 fixed top-0 right-0 bottom-0 left-0 h-2 bg-[#2B3A54]"
+        style={{ scaleX: scrollYProgress, originX: 0 }}
+      ></motion.div>
+      <motion.article className="m-20">
         <motion.h1
           variants={itemVariants}
           initial="hidden"
@@ -52,7 +54,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="max-w-2xl text-5xl"
         >
           Sono nato a Bologna nel Settembre del 1993, città in cui ho studiato e
           in cui vivo e lavoro come Fisioterapista con Master Universitario di I
@@ -64,7 +66,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="ml-auto max-w-2xl text-5xl"
         >
           Sono specializzato nel campo Ortopedico e nella riabilitazione
           post-chirurgica e conservativa. Il mio obiettivo è integrare
@@ -76,7 +78,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="max-w-2xl text-5xl"
         >
           Mi sono diplomato al Liceo Classico Marco Minghetti per poi laurearmi
           con lode in Fisioterapia nel 2016 presso l'Alma Mater Studiorum di
@@ -89,7 +91,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="ml-auto max-w-2xl text-5xl"
         >
           {" "}
           Subito dopo ho iniziato a lavorare come Fisioterapista in un centro di
@@ -105,7 +107,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="max-w-2xl text-5xl"
         >
           {" "}
           Col tempo ho maturato la consapevolezza che il corpo non possa essere
@@ -122,7 +124,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="ml-auto max-w-2xl text-5xl"
         >
           {" "}
           Un aspetto centrale del mio lavoro è la comunicazione: credo che il
@@ -137,7 +139,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="max-w-2xl text-5xl"
         >
           {" "}
           Considero l'esercizio terapeutico uno strumento fondamentale: gli
@@ -149,7 +151,7 @@ export default function ChiSonoPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          className="text-5xl"
+          className="ml-auto max-w-2xl text-5xl"
         >
           {" "}
           Mi occupo infine di riabilitazione Oncologica, accompagnando le
@@ -159,6 +161,6 @@ export default function ChiSonoPage() {
           nel centro di Bologna e vicinanze.
         </motion.p>
       </motion.article>
-    </main>
+    </>
   );
 }
