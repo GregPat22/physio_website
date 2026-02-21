@@ -22,7 +22,7 @@ function TimelineNode({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["center 85%", "center 45%"],
+    offset: ["center 95%", "center 15%"],
   });
 
   const isFirst = index === 0;
@@ -31,20 +31,20 @@ function TimelineNode({
 
   const lineAbove = useTransform(
     scrollYProgress,
-    [0, 0.3],
+    [0, 0.28],
     isFirst ? [1, 1] : [0, 1],
   );
   const dotReveal = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.45],
+    [0.25, 0.3, 0.42],
     isFirst ? [1, 1, 1] : [0, 0, 1],
   );
   const branchReveal = useTransform(
     scrollYProgress,
-    [0, 0.25, 0.55],
+    [0.38, 0.42, 0.56],
     isFirst ? [1, 1, 1] : [0, 0, 1],
   );
-  const lineBelow = useTransform(scrollYProgress, [0.45, 0.8], [0, 1]);
+  const lineBelow = useTransform(scrollYProgress, [0.52, 0.85], [0, 1]);
 
   return (
     <div ref={ref} className="relative hidden self-stretch md:block">

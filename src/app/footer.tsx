@@ -123,7 +123,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-semibold uppercase tracking-[2px] text-white/40">
+            <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
               Navigazione
             </h3>
             <nav className="flex flex-col gap-3">
@@ -131,7 +131,7 @@ export default function Footer() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="relative w-fit text-sm text-white/70 transition-colors duration-300 hover:text-white after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative w-fit text-sm text-white/70 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:text-white hover:after:w-full"
                 >
                   {link.label}
                 </a>
@@ -141,7 +141,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xs font-semibold uppercase tracking-[2px] text-white/40">
+            <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
               Newsletter
             </h3>
             <p className="text-sm leading-relaxed text-white/60">

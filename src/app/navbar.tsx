@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "framer-motion";
+import RisorseDropdown, { risorseItems } from "@/components/risorse-dropdown";
 
 /** Tailwind "sm" breakpoint: below this width, show menu icon instead of full navbar */
 const SM_BREAKPOINT_PX = 640;
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isRisorseExpanded, setIsRisorseExpanded] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
@@ -92,24 +94,12 @@ const Navbar = () => {
               </h2>
             </a>
             <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-14 lg:mr-4 lg:gap-x-14">
-              <motion.li
-                className="flex items-center text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5 }}
-              >
-                <a href="/risorse" className="flex items-center">
-                  RISORSE
-                  <motion.span
-                    className="ml-2 inline-block"
-                    whileHover={{ rotate: 180 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ChevronUpIcon className="w-3 md:w-2.5 lg:w-3" />
-                  </motion.span>
-                </a>
-              </motion.li>
+              <RisorseDropdown />
               <li className="text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]">
-                <a href="/contatti" className="hover:underline">
+                <a
+                  href="/contatti"
+                  className="relative w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                >
                   CONTATTI
                 </a>
               </li>
@@ -204,26 +194,93 @@ const Navbar = () => {
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  {menuItems.map((item, index) => (
-                    <motion.a
-                      key={item.label}
-                      href={item.href}
-                      className={`flex items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-200 ${
-                        item.isHighlighted
-                          ? "bg-[#2B3A54] text-white hover:bg-[#3c5074]"
-                          : "hover:bg-[#2B3A54]/5"
-                      } ${index !== menuItems.length - 1 && !item.isHighlighted ? "border-b border-[#2B3A54]/10" : ""}`}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.label}
-                      {item.hasIcon && (
-                        <ChevronUpIcon className="w-3 rotate-90" />
-                      )}
-                    </motion.a>
-                  ))}
+                  {menuItems.map((item, index) =>
+                    item.hasIcon ? (
+                      <div key={item.label}>
+                        <motion.button
+                          className={`flex w-full items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-75 hover:bg-[#2B3A54]/5 ${
+                            index !== menuItems.length - 1 && !isRisorseExpanded
+                              ? "border-b border-[#2B3A54]/10"
+                              : ""
+                          }`}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                          onClick={() => setIsRisorseExpanded((v) => !v)}
+                        >
+                          {item.label}
+                          <motion.span
+                            animate={{ rotate: isRisorseExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ChevronUpIcon className="w-3" />
+                          </motion.span>
+                        </motion.button>
+                        <AnimatePresence>
+                          {isRisorseExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                              className={`overflow-hidden ${
+                                index !== menuItems.length - 1
+                                  ? "border-b border-[#2B3A54]/10"
+                                  : ""
+                              }`}
+                            >
+                              {risorseItems.map((sub) => (
+                                <a
+                                  key={sub.label}
+                                  href={sub.href}
+                                  className="flex flex-col px-8 py-2.5 transition-colors duration-75 hover:bg-[#2B3A54]/5"
+                                  onClick={() => {
+                                    setIsMenuOpen(false);
+                                    setIsRisorseExpanded(false);
+                                  }}
+                                >
+                                  <span className="text-[10px] font-medium tracking-[0.5px] text-[#2B3A54]/80">
+                                    {sub.label}
+                                  </span>
+                                  {sub.description && (
+                                    <span className="mt-0.5 text-[9px] font-light text-[#2B3A54]/40">
+                                      {sub.description}
+                                    </span>
+                                  )}
+                                </a>
+                              ))}
+                              <a
+                                href="/risorse"
+                                className="flex items-center gap-1.5 px-8 py-2.5 text-[9px] font-medium tracking-[0.5px] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
+                                onClick={() => {
+                                  setIsMenuOpen(false);
+                                  setIsRisorseExpanded(false);
+                                }}
+                              >
+                                Tutte le risorse →
+                              </a>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <motion.a
+                        key={item.label}
+                        href={item.href}
+                        className={`flex items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-75 ${
+                          item.isHighlighted
+                            ? "bg-[#2B3A54] text-white hover:bg-[#3c5074]"
+                            : "hover:bg-[#2B3A54]/5"
+                        } ${index !== menuItems.length - 1 && !item.isHighlighted ? "border-b border-[#2B3A54]/10" : ""}`}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </motion.a>
+                    )
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
