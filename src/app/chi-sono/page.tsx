@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "../navbar";
+import Footer from "../footer";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
@@ -202,6 +203,7 @@ export default function ChiSonoPage() {
           nel centro di Bologna e vicinanze.
         </motion.p>
       </motion.article>
+      <Footer />
     </>
   );
 }

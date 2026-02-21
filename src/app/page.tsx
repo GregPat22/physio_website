@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 import TrustBadge from "./trustbadge";
 import FAQ from "./freqaq";
+import Footer from "./footer";
 
 import TitoliDiStudio from "@/components/ui/titoli-di-studio";
 
@@ -107,7 +108,7 @@ export default function Home() {
         <motion.img
           src="/benni.jpg"
           alt="Foto di Federico Benni nella sua clinica"
-          className="h-auto w-[35s0px] md:absolute md:top-0 md:right-0 md:h-[625px] md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-[625px] lg:w-auto"
+          className="h-auto w-[350px] md:absolute md:top-0 md:right-0 md:h-[550px] md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-[625px] lg:w-auto"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
@@ -115,6 +116,7 @@ export default function Home() {
       </main>
       <TrustBadge />
       <FAQ />
+      <Footer />
     </>
   );
 }
