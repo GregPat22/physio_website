@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import React from "react";
 
 const itemVariants = {
@@ -21,7 +21,7 @@ const TitoliDiStudio = () => {
     <>
       <motion.div className="m-8 flex w-fit flex-col md:mr-120 md:ml-20 lg:mr-120 lg:ml-20">
         <motion.p
-          className="font-family-roboto-mono mb-1 text-[10px] font-medium tracking-[1px] text-gray-500 md:text-[14px] lg:text-[20px]"
+          className="font-family-roboto-mono mb-1 text-[0.625rem] font-medium tracking-widest text-gray-500 md:text-sm lg:text-xl"
           variants={itemVariants}
         >
           •Laurea in Fisioterapia
@@ -29,12 +29,12 @@ const TitoliDiStudio = () => {
             <img
               src="unibo.svg"
               alt="Logo UniBO"
-              className="ml-2 inline-block h-8 w-auto md:h-[20px] md:w-[20px] lg:h-[40px] lg:w-[40px]"
+              className="ml-2 inline-block h-8 w-auto md:h-5 md:w-5 lg:h-10 lg:w-10"
             />
           </a>
         </motion.p>
         <motion.p
-          className="font-family-roboto-mono mt-[0.2px] text-[10px] font-medium tracking-[1px] text-gray-500 md:text-[14px] lg:text-[20px]"
+          className="font-family-roboto-mono mt-px text-[0.625rem] font-medium tracking-widest text-gray-500 md:text-sm lg:text-xl"
           variants={itemVariants}
         >
           •Master Universitario in Osteopatia
@@ -42,7 +42,7 @@ const TitoliDiStudio = () => {
             <img
               src="eom.png"
               alt="Logo EOM"
-              className="ml-2 inline-block h-8 w-auto md:h-[20px] md:w-[40px] lg:h-[40px] lg:w-[80px]"
+              className="ml-2 inline-block h-8 w-auto md:h-5 md:w-10 lg:h-10 lg:w-20"
             />
           </a>
         </motion.p>

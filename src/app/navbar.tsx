@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import RisorseDropdown, { risorseItems } from "@/components/risorse-dropdown";
 
 /** Tailwind "sm" breakpoint: below this width, show menu icon instead of full navbar */
@@ -86,7 +86,7 @@ const Navbar = () => {
               <img
                 src="/Logo_plain.png"
                 alt="Logo Dott. Federico Benni"
-                className="h-[30px] w-[30px] object-contain"
+                className="h-7.5 w-7.5 object-contain"
                 style={{ mixBlendMode: "lighten" }}
               />
               <h2 className="font-family-roboto-flex font-medium">
@@ -95,7 +95,7 @@ const Navbar = () => {
             </a>
             <ul className="mr-4 flex items-center gap-x-14 md:mr-3 md:gap-x-14 lg:mr-4 lg:gap-x-14">
               <RisorseDropdown />
-              <li className="text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]">
+              <li className="text-[0.625rem] font-medium tracking-widest md:text-[0.625rem] lg:text-[0.625rem]">
                 <a
                   href="/contatti"
                   className="relative w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
@@ -103,7 +103,7 @@ const Navbar = () => {
                   CONTATTI
                 </a>
               </li>
-              <li className="text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]">
+              <li className="text-[0.625rem] font-medium tracking-widest md:text-[0.625rem] lg:text-[0.625rem]">
                 <a
                   href="/chi-sono"
                   className="group relative block rounded-tl-lg px-4 py-2 font-light text-white md:px-3 md:py-1.5 lg:px-4 lg:py-2"
@@ -143,7 +143,7 @@ const Navbar = () => {
                   <img
                     src="/Logo_plain.png"
                     alt="Logo Dott. Federico Benni"
-                    className="h-[30px] w-[30px] object-contain"
+                    className="h-7.5 w-7.5 object-contain"
                     style={{ mixBlendMode: "lighten" }}
                   />
                   <h2 className="font-family-roboto-flex font-medium text-[#2B3A54]">
@@ -153,42 +153,70 @@ const Navbar = () => {
               )}
             </AnimatePresence>
             <div className="ml-auto">
-              <button
+              <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="group relative flex h-10 w-10 items-center justify-center border border-[#2B3A54]/20 bg-white/90 backdrop-blur-sm transition-all duration-300 hover:border-[#2B3A54]/40 hover:bg-white"
+                className="group relative flex h-10 w-10 items-center justify-center border border-[#2B3A54]/20 bg-white/90 backdrop-blur-sm transition-colors duration-300 hover:border-[#2B3A54]/40 hover:bg-white"
                 aria-label="Menu"
+                whileTap={{ scale: 0.88 }}
+                transition={{ type: "spring", bounce: 0.35, visualDuration: 0.15 }}
               >
-                <div className="flex flex-col items-center justify-center gap-[5px]">
-                  <motion.span
-                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
-                    animate={
-                      isMenuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }
-                    }
-                    transition={{ duration: 0.2 }}
+                <svg width="26" height="18" viewBox="0 0 20 14" fill="none" className="overflow-visible">
+                  <motion.path
+                    d="M 0 0.75 L 20 0.75"
+                    stroke="#2B3A54"
+                    strokeWidth={1.5}
+                    strokeLinecap="round"
+                    animate={{
+                      d: isMenuOpen ? "M 3 1 L 17 13" : "M 0 0.75 L 20 0.75",
+                    }}
+                    transition={{ type: "spring", bounce: 0.15, visualDuration: 0.4 }}
                   />
-                  <motion.span
-                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
-                    animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <motion.span
-                    className="block h-[1.5px] w-5 bg-[#2B3A54]"
+                  <motion.path
+                    d="M 0 7 L 20 7"
+                    stroke="#2B3A54"
+                    strokeWidth={1.5}
+                    strokeLinecap="round"
                     animate={
                       isMenuOpen
-                        ? { rotate: -45, y: -6.5 }
-                        : { rotate: 0, y: 0 }
+                        ? { d: "M 10 7 L 10 7", opacity: 0 }
+                        : { d: "M 0 7 L 20 7", opacity: 1 }
                     }
-                    transition={{ duration: 0.2 }}
+                    transition={
+                      isMenuOpen
+                        ? {
+                            type: "spring",
+                            bounce: 0,
+                            visualDuration: 0.2,
+                            opacity: { duration: 0.12 },
+                          }
+                        : {
+                            type: "spring",
+                            bounce: 0,
+                            visualDuration: 0.3,
+                            delay: 0.12,
+                            opacity: { duration: 0.15, delay: 0.1 },
+                          }
+                    }
                   />
-                </div>
-              </button>
+                  <motion.path
+                    d="M 0 13.25 L 20 13.25"
+                    stroke="#2B3A54"
+                    strokeWidth={1.5}
+                    strokeLinecap="round"
+                    animate={{
+                      d: isMenuOpen ? "M 3 13 L 17 1" : "M 0 13.25 L 20 13.25",
+                    }}
+                    transition={{ type: "spring", bounce: 0.15, visualDuration: 0.4 }}
+                  />
+                </svg>
+              </motion.button>
             </div>
 
             {/* Dropdown Menu */}
             <AnimatePresence>
               {isMenuOpen && (
                 <motion.div
-                  className="absolute top-14 right-4 min-w-[180px] border border-[#2B3A54]/10 bg-white/95 backdrop-blur-sm"
+                  className="absolute top-14 right-4 min-w-45 border border-[#2B3A54]/10 bg-white/95 backdrop-blur-sm"
                   initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -198,7 +226,7 @@ const Navbar = () => {
                     item.hasIcon ? (
                       <div key={item.label}>
                         <motion.button
-                          className={`flex w-full items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-75 hover:bg-[#2B3A54]/5 ${
+                          className={`flex w-full items-center justify-between px-5 py-3 text-[0.6875rem] font-light tracking-widest transition-colors duration-75 hover:bg-[#2B3A54]/5 ${
                             index !== menuItems.length - 1 && !isRisorseExpanded
                               ? "border-b border-[#2B3A54]/10"
                               : ""
@@ -210,10 +238,12 @@ const Navbar = () => {
                         >
                           {item.label}
                           <motion.span
-                            animate={{ rotate: isRisorseExpanded ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
+                            className="inline-flex items-center justify-center"
+                            animate={{ rotate: isRisorseExpanded ? 180 : 0, scale: isRisorseExpanded ? 1.1 : 1 }}
+                            transition={{ type: "spring", bounce: 0.3, visualDuration: 0.35 }}
+                            style={{ willChange: "transform" }}
                           >
-                            <ChevronUpIcon className="w-3" />
+                            <ChevronUpIcon className="h-3 w-3" />
                           </motion.span>
                         </motion.button>
                         <AnimatePresence>
@@ -222,7 +252,10 @@ const Navbar = () => {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                              transition={{
+                                duration: 0.2,
+                                ease: [0.4, 0, 0.2, 1],
+                              }}
                               className={`overflow-hidden ${
                                 index !== menuItems.length - 1
                                   ? "border-b border-[#2B3A54]/10"
@@ -239,11 +272,11 @@ const Navbar = () => {
                                     setIsRisorseExpanded(false);
                                   }}
                                 >
-                                  <span className="text-[10px] font-medium tracking-[0.5px] text-[#2B3A54]/80">
+                                  <span className="text-[0.625rem] font-medium tracking-[0.05em] text-[#2B3A54]/80">
                                     {sub.label}
                                   </span>
                                   {sub.description && (
-                                    <span className="mt-0.5 text-[9px] font-light text-[#2B3A54]/40">
+                                    <span className="mt-0.5 text-[0.5625rem] font-light text-[#2B3A54]/40">
                                       {sub.description}
                                     </span>
                                   )}
@@ -251,7 +284,7 @@ const Navbar = () => {
                               ))}
                               <a
                                 href="/risorse"
-                                className="flex items-center gap-1.5 px-8 py-2.5 text-[9px] font-medium tracking-[0.5px] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
+                                className="flex items-center gap-1.5 px-8 py-2.5 text-[0.5625rem] font-medium tracking-[0.05em] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
                                 onClick={() => {
                                   setIsMenuOpen(false);
                                   setIsRisorseExpanded(false);
@@ -267,7 +300,7 @@ const Navbar = () => {
                       <motion.a
                         key={item.label}
                         href={item.href}
-                        className={`flex items-center justify-between px-5 py-3 text-[11px] font-light tracking-[1px] transition-colors duration-75 ${
+                        className={`flex items-center justify-between px-5 py-3 text-[0.6875rem] font-light tracking-widest transition-colors duration-75 ${
                           item.isHighlighted
                             ? "bg-[#2B3A54] text-white hover:bg-[#3c5074]"
                             : "hover:bg-[#2B3A54]/5"
@@ -279,7 +312,7 @@ const Navbar = () => {
                       >
                         {item.label}
                       </motion.a>
-                    )
+                    ),
                   )}
                 </motion.div>
               )}

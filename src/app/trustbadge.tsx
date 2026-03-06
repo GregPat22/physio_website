@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { loadMioDottoreWidget } from "@/lib/miodottore-widget";
 import Carousel from "@/components/ui/carousel";
-import { MotionConfig, motion } from "framer-motion";
+import { MotionConfig, motion } from "motion/react";
 
 const TrustBadge = () => {
   useEffect(() => {
@@ -11,7 +11,7 @@ const TrustBadge = () => {
   }, []);
 
   return (
-    <section className="overflow-hidden md:mt-[140px] lg:mt-[60px]">
+    <section className="overflow-hidden md:mt-35 lg:mt-15">
       <motion.div className="flex flex-col items-center">
         <h1 className="font-family-open-sans px-8 pt-20 text-center text-2xl font-bold sm:text-3xl md:text-4xl lg:text-6xl">
           Cosa dicono i miei pazienti

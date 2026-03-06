@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 interface FAQItem {
   id: number;
@@ -98,7 +98,7 @@ export default function FAQ() {
                     <div
                       className={`relative transition-[height,border] duration-800 ease-out ${
                         !isOpen
-                          ? "h-[11px] max-w-fit overflow-hidden border-b border-[#2B3A54]/30 sm:h-[12px] md:h-[14px] lg:h-[18px]"
+                          ? "h-2.75 max-w-fit overflow-hidden border-b border-[#2B3A54]/30 sm:h-3 md:h-3.5 lg:h-4.5"
                           : "max-w-fit"
                       }`}
                     >

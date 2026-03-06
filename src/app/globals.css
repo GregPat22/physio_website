@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
+  --breakpoint-lg: 1536px;
+  --breakpoint-xl: 1920px;
+  --breakpoint-2xl: 2304px;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-mono: var(--font-roboto-mono);
@@ -98,6 +102,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    font-size: clamp(1rem, 1.667vw, 1.5rem);
   }
   body {
     color: #2b3a54;

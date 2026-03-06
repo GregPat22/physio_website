@@ -3,45 +3,9 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Phone } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-
-const TYPEWRITER_TEXT = "name@email.com";
-const TYPE_SPEED = 100;
-const DELETE_SPEED = 60;
-const PAUSE_AFTER_TYPE = 2000;
-const PAUSE_AFTER_DELETE = 800;
-
-function useTypewriter() {
-  const [display, setDisplay] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    if (!isDeleting) {
-      if (display.length < TYPEWRITER_TEXT.length) {
-        timeout = setTimeout(() => {
-          setDisplay(TYPEWRITER_TEXT.slice(0, display.length + 1));
-        }, TYPE_SPEED);
-      } else {
-        timeout = setTimeout(() => setIsDeleting(true), PAUSE_AFTER_TYPE);
-      }
-    } else {
-      if (display.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplay(display.slice(0, -1));
-        }, DELETE_SPEED);
-      } else {
-        timeout = setTimeout(() => setIsDeleting(false), PAUSE_AFTER_DELETE);
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [display, isDeleting]);
-
-  return display;
-}
+import { motion } from "motion/react";
+import { Typewriter } from "motion-plus/react";
+import { useState } from "react";
 
 const footerLinks = [
   { label: "RISORSE", href: "/risorse" },
@@ -50,15 +14,14 @@ const footerLinks = [
 ];
 
 export default function Footer() {
-  const typewriterText = useTypewriter();
   const [emailValue, setEmailValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const showPlaceholder = !isFocused && emailValue.length === 0;
 
   return (
     <footer className="bg-[#2B3A54] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 md:px-12 md:py-20">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-16">
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <a
@@ -140,7 +103,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
+          <div className="flex flex-col gap-4 sm:col-span-2 md:col-span-1">
             <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
               Newsletter
             </h3>
@@ -162,10 +125,12 @@ export default function Footer() {
                 />
                 {showPlaceholder && (
                   <span className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-white/40">
-                    {typewriterText}
-                    <span className="ml-px inline-block w-px animate-pulse bg-white/40">
-                      &nbsp;
-                    </span>
+                    <Typewriter
+                      speed="slow"
+                      cursorStyle={{ backgroundColor: "rgba(255,255,255,0.4)" }}
+                    >
+                      name@email.com
+                    </Typewriter>
                   </span>
                 )}
               </div>

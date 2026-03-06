@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 
 interface CardProps {
   image: string;
@@ -15,7 +15,7 @@ function Card({ image, index }: CardProps) {
       onHoverStart={() => setShowOverlay(true)}
       onHoverEnd={() => setShowOverlay(false)}
     >
-      <motion.div className="relative flex h-auto w-[280px] items-center justify-center overflow-hidden bg-gray-50">
+      <motion.div className="relative flex h-auto w-70 items-center justify-center overflow-hidden bg-gray-50">
         <img src={image} alt={image} className="w-full object-contain p-2" />
         <AnimatePresence>
           {showOverlay && (

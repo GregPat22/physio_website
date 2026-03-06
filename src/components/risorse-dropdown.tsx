@@ -1,26 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import {
-  ChevronUpIcon,
-  PencilSquareIcon,
-  QuestionMarkCircleIcon,
-  BookOpenIcon,
-} from "@heroicons/react/24/solid";
-import { motion, AnimatePresence } from "framer-motion";
-
-interface IconAnimation {
-  hovered: Record<string, number | number[]>;
-  initial: Record<string, number | number[]>;
-  transition: Record<string, unknown>;
-}
+import { useState, useRef, useEffect } from "react";
+import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { motion, AnimatePresence } from "motion/react";
 
 interface RisorseItem {
   label: string;
   href: string;
   description?: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  iconAnimation: IconAnimation;
 }
 
 export const risorseItems: RisorseItem[] = [
@@ -28,41 +15,16 @@ export const risorseItems: RisorseItem[] = [
     label: "Blog",
     href: "/risorse/blog",
     description: "Articoli e approfondimenti",
-    icon: PencilSquareIcon,
-    iconAnimation: {
-      initial: { rotate: 0, y: 0, x: 0 },
-      hovered: { rotate: -20, y: 1, x: 1 },
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 12,
-        repeat: 1,
-        repeatType: "reverse",
-        duration: 0.3,
-      },
-    },
   },
   {
     label: "FAQ",
     href: "/risorse/faq",
     description: "Domande frequenti",
-    icon: QuestionMarkCircleIcon,
-    iconAnimation: {
-      initial: { rotate: 0, scale: 1 },
-      hovered: { rotate: [0, -12, 12, -8, 8, 0], scale: 1.15 },
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
   },
   {
     label: "Guide",
     href: "/risorse/guide",
     description: "Esercizi e consigli pratici",
-    icon: BookOpenIcon,
-    iconAnimation: {
-      initial: { scaleX: 1, rotateY: 0 },
-      hovered: { scaleX: [1, 1.15, 1.05], rotateY: [0, -15, 0] },
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
   },
 ];
 
@@ -145,11 +107,12 @@ export default function RisorseDropdown() {
   return (
     <motion.li
       ref={containerRef}
-      className="relative flex items-center text-[10px] font-medium tracking-[1px] md:text-[10px] lg:text-[10px]"
+      className="relative flex items-center text-[0.625rem] font-medium tracking-widest md:text-[0.625rem] lg:text-[0.625rem]"
       onMouseEnter={open}
       onMouseLeave={close}
       whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.5 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", bounce: 0.2, visualDuration: 0.3 }}
     >
       <button
         className="flex cursor-pointer items-center bg-transparent"
@@ -159,93 +122,51 @@ export default function RisorseDropdown() {
       >
         RISORSE
         <motion.span
-          className="ml-2 inline-block"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          className="ml-1.5 inline-flex items-center justify-center"
+          animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
+          transition={{ type: "spring", bounce: 0.3, visualDuration: 0.35 }}
+          style={{ willChange: "transform" }}
         >
-          <ChevronUpIcon className="w-3 md:w-2.5 lg:w-3" />
+          <ChevronUpIcon className="h-3 w-3" />
         </motion.span>
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute right-0 top-full z-50 mt-3 w-56 overflow-hidden border border-[#2B3A54]/10 bg-white shadow-lg shadow-[#2B3A54]/5"
+            className="absolute right-0 top-full z-50 mt-3 min-w-45 border border-[#2B3A54]/10 bg-white/95 backdrop-blur-sm"
             variants={dropdownVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="flex flex-col">
-              {risorseItems.map((item, index) => (
-                <motion.a
-                  key={item.label}
-                  href={item.href}
-                  variants={itemVariants}
-                  className="group flex flex-col border-l-2 border-l-transparent px-4 py-3 transition-all duration-75 hover:border-l-[#2B3A54] hover:bg-[#2B3A54]/5"
-                  initial="initial"
-                  whileHover="hovered"
-                  whileTap="tapped"
-                  style={{
-                    borderBottom:
-                      index !== risorseItems.length - 1
-                        ? "1px solid rgba(43,58,84,0.06)"
-                        : "none",
-                  }}
-                >
-                  <div className="flex items-start gap-2.5">
-                    <motion.span
-                      className="mt-px shrink-0"
-                      variants={{
-                        initial: item.iconAnimation.initial,
-                        hovered: item.iconAnimation.hovered,
-                        tapped: { scale: 0.85 },
-                      }}
-                      transition={item.iconAnimation.transition}
-                    >
-                      <item.icon className="h-3.5 w-3.5 text-[#2B3A54]/60 transition-colors duration-75 group-hover:text-[#2B3A54]" />
-                    </motion.span>
-                    <div className="flex flex-col">
-                      <span className="text-[11px] font-medium tracking-[0.5px] text-[#2B3A54]/70 transition-colors duration-75 group-hover:text-[#2B3A54]">
-                        {item.label}
-                      </span>
-                      {item.description && (
-                        <span className="mt-0.5 text-[9px] leading-tight font-light text-[#2B3A54]/30 transition-colors duration-75 group-hover:text-[#2B3A54]/60">
-                          {item.description}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </motion.a>
-
-              ))}
-            </div>
-
-            <div
-              style={{
-                borderTop: "1px solid rgba(43,58,84,0.06)",
-              }}
-            >
-              <a
-                href="/risorse"
-                className="group flex items-center justify-between px-4 py-2.5 text-[10px] font-medium tracking-[0.5px] text-[#2B3A54]/40 transition-all duration-75 hover:bg-[#2B3A54]/5 hover:text-[#2B3A54]/80"
+            {risorseItems.map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                variants={itemVariants}
+                className={`flex flex-col px-5 py-3 transition-colors duration-75 hover:bg-[#2B3A54]/5 ${
+                  index !== risorseItems.length - 1
+                    ? "border-b border-[#2B3A54]/10"
+                    : ""
+                }`}
               >
-                Vedi tutte le risorse
-                <svg
-                  className="h-3 w-3 transition-transform duration-75 group-hover:translate-x-0.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </a>
-            </div>
+                <span className="text-[0.625rem] font-medium tracking-[0.05em] text-[#2B3A54]/80">
+                  {item.label}
+                </span>
+                {item.description && (
+                  <span className="mt-0.5 text-[0.5625rem] font-light text-[#2B3A54]/40">
+                    {item.description}
+                  </span>
+                )}
+              </motion.a>
+            ))}
+            <a
+              href="/risorse"
+              className="flex items-center gap-1.5 border-t border-[#2B3A54]/10 px-5 py-2.5 text-[0.5625rem] font-medium tracking-[0.05em] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
+            >
+              Tutte le risorse →
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

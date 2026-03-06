@@ -1,13 +1,19 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { type RefObject } from "react";
+import { motion, useScroll, useSpring } from "motion/react";
 
 export default function ReadingProgressBar({
   className = "bg-[#2B3A54]",
+  target,
 }: {
   className?: string;
+  target?: RefObject<HTMLElement | null>;
 }) {
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll({
+    target,
+    offset: ["start start", "end end"],
+  });
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 200,
     damping: 40,
