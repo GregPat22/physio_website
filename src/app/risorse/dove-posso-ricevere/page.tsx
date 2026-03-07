@@ -41,7 +41,7 @@ export default function DovePossoRiceverePage() {
               </span>
             </div>
             <h1 className="font-family-roboto-flex text-3xl font-semibold tracking-tight text-[#2B3A54] md:text-4xl lg:text-5xl">
-              Dove Posso Ricevere
+              Dove Ricevo
             </h1>
             <p className="font-family-roboto-flex mt-4 max-w-2xl text-base font-light leading-relaxed text-[#2B3A54]/60 md:text-lg">
               Ricevo presso il{" "}

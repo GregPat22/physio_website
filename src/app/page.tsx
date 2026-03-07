@@ -14,6 +14,9 @@ const FAQ = dynamic(() => import("./freqaq"));
 const UrgencySection = dynamic(() => import("./urgency-section"));
 const FinalCTA = dynamic(() => import("./final-cta"));
 const Footer = dynamic(() => import("./footer"));
+const DoctorPuppet = dynamic(() => import("@/components/doctor-puppet"), {
+  ssr: false,
+});
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -52,7 +55,7 @@ export default function Home() {
             className="font-family-roboto-flex text-2xl font-semibold tracking-tight md:-mb-2 md:text-4xl lg:-mb-2 lg:text-5xl"
             initial={{ opacity: 0, clipPath: "inset(100% 0 0 0)", y: 20 }}
             animate={{ opacity: 1, clipPath: "inset(0% 0 0 0)", y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease }}
+            transition={{ duration: 0.5, delay: 0.2, ease }}
           >
             Scegli di{"   "}
             <span className="font-family-libre-bodoni text-2xl font-extrabold italic md:text-4xl lg:text-6xl">
@@ -63,7 +66,7 @@ export default function Home() {
             className="font-family-roboto-flex mt-6 font-light sm:text-base md:text-base lg:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0, ease }}
+            transition={{ duration: 0.5, delay: 0.55, ease }}
           >
             " Credo in una Fisioterapia fatta di dialogo, condivisione,
             trattamento manuale ed esercizio terapeutico, per{" "}
@@ -78,17 +81,17 @@ export default function Home() {
             className="mt-auto w-25 self-end md:w-[7.8rem] lg:w-50"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 1.8, ease }}
+            transition={{ duration: 0.45, delay: 0.95, ease }}
             loading="lazy"
           />
         </div>
 
         <div className="w-full">
-          <TitoliDiStudio baseDelay={2.6} />
+          <TitoliDiStudio baseDelay={1.3} />
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 4.4, ease }}
+            transition={{ duration: 0.4, delay: 2.2, ease }}
           >
             <PrenotaButton />
           </motion.div>
@@ -100,7 +103,7 @@ export default function Home() {
           className="mx-auto h-auto w-88 md:mx-0 md:absolute md:top-0 md:right-0 md:h-137.5 md:w-auto lg:absolute lg:top-0 lg:right-0 lg:h-156 lg:w-auto"
           initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
           animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
-          transition={{ duration: 1.0, delay: 0.05, ease: [0.77, 0, 0.175, 1] }}
+          transition={{ duration: 0.7, delay: 0.05, ease: [0.77, 0, 0.175, 1] }}
           fetchPriority="high"
           decoding="async"
         />
@@ -111,6 +114,7 @@ export default function Home() {
       <UrgencySection />
       <FinalCTA />
       <Footer />
+      <DoctorPuppet />
     </>
   );
 }

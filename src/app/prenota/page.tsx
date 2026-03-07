@@ -418,6 +418,88 @@ const PARTICLE_COLORS = [
   "rgba(16, 185, 129, 0.45)",
 ];
 
+function useHoldSound() {
+  const ctxRef = useRef<AudioContext | null>(null);
+  const nodesRef = useRef<{ osc: OscillatorNode; gain: GainNode } | null>(null);
+
+  const getCtx = useCallback(() => {
+    if (!ctxRef.current || ctxRef.current.state === "closed") {
+      ctxRef.current = new AudioContext();
+    }
+    if (ctxRef.current.state === "suspended") ctxRef.current.resume();
+    return ctxRef.current;
+  }, []);
+
+  const startFill = useCallback(() => {
+    try {
+      const ctx = getCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(320, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(580, ctx.currentTime + HOLD_MS / 1000);
+
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.06);
+      gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + HOLD_MS / 1000);
+
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      nodesRef.current = { osc, gain };
+    } catch {}
+  }, [getCtx]);
+
+  const stopFill = useCallback(() => {
+    try {
+      const n = nodesRef.current;
+      if (!n) return;
+      const ctx = ctxRef.current;
+      if (!ctx) return;
+      n.gain.gain.cancelScheduledValues(ctx.currentTime);
+      n.gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.06);
+      n.osc.stop(ctx.currentTime + 0.07);
+      nodesRef.current = null;
+    } catch {}
+  }, []);
+
+  const playConfirm = useCallback(() => {
+    try {
+      const ctx = getCtx();
+      const t = ctx.currentTime;
+
+      const o1 = ctx.createOscillator();
+      const o2 = ctx.createOscillator();
+      const g = ctx.createGain();
+
+      o1.type = "sine";
+      o1.frequency.setValueAtTime(660, t);
+      o2.type = "sine";
+      o2.frequency.setValueAtTime(880, t + 0.08);
+
+      g.gain.setValueAtTime(0.13, t);
+      g.gain.linearRampToValueAtTime(0.09, t + 0.12);
+      g.gain.linearRampToValueAtTime(0, t + 0.28);
+
+      o1.connect(g).connect(ctx.destination);
+      o2.connect(g);
+      o1.start(t);
+      o2.start(t + 0.08);
+      o1.stop(t + 0.3);
+      o2.stop(t + 0.3);
+    } catch {}
+  }, [getCtx]);
+
+  useEffect(() => {
+    return () => {
+      try { nodesRef.current?.osc.stop(); } catch {}
+      try { ctxRef.current?.close(); } catch {}
+    };
+  }, []);
+
+  return { startFill, stopFill, playConfirm };
+}
+
 function HoldToConfirmButton({
   onValidate,
   onConfirm,
@@ -435,11 +517,16 @@ function HoldToConfirmButton({
   validateRef.current = onValidate;
   confirmRef.current = onConfirm;
 
+  const { startFill, stopFill, playConfirm } = useHoldSound();
+
   const begin = useCallback(() => {
     if (phase === "done") return;
     if (!validateRef.current()) return;
     setPhase("holding");
+    startFill();
     timerRef.current = setTimeout(() => {
+      stopFill();
+      playConfirm();
       setPhase("done");
       try {
         navigator.vibrate?.([10, 30, 15]);
@@ -455,12 +542,15 @@ function HoldToConfirmButton({
       );
       setTimeout(() => confirmRef.current(), 180);
     }, HOLD_MS);
-  }, [phase]);
+  }, [phase, startFill, stopFill, playConfirm]);
 
   const cancel = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
-    if (phase === "holding") setPhase("idle");
-  }, [phase]);
+    if (phase === "holding") {
+      stopFill();
+      setPhase("idle");
+    }
+  }, [phase, stopFill]);
 
   useEffect(
     () => () => {

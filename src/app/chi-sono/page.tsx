@@ -23,6 +23,62 @@ const paragraphs = [
   "Mi occupo infine di riabilitazione Oncologica, accompagnando le persone nel recupero dell'autonomia e nel miglioramento della qualità di vita. Ricevo su appuntamento presso il Poliambulatorio MG, in via Irnerio 53 a Bologna, e mi occupo anche di Fisioterapia a domicilio nel centro di Bologna e vicinanze.",
 ];
 
+const milestones: { year?: string; label: string; sublabel?: string }[] = [
+  { year: "1993", label: "Nato a Bologna" },
+  {
+    year: "2016",
+    label: "Laurea in Fisioterapia con lode",
+    sublabel: "Alma Mater Studiorum di Bologna",
+  },
+  {
+    year: "2016–18",
+    label: "Fisioterapista sportivo",
+    sublabel: "Pallavolo Serie C e B1",
+  },
+  {
+    year: "2019",
+    label: "Master in Osteopatia",
+    sublabel: "EOM — Università di Verona",
+  },
+  {
+    label: "Manipolazione Fasciale®",
+    sublabel: "Metodo Stecco I e II livello",
+  },
+  {
+    label: "Neuroscienze del Dolore",
+    sublabel: "Specializzazione in dolore cronico",
+  },
+  {
+    year: "Oggi",
+    label: "Poliambulatorio MG",
+    sublabel: "Via Irnerio 53, Bologna",
+  },
+];
+
+const chapters = [
+  {
+    title: "Le Origini",
+    text: "Diplomato al Liceo Classico Marco Minghetti, laureato con lode in Fisioterapia nel 2016 presso l'Alma Mater Studiorum di Bologna. Dopo un percorso formativo tra aule universitarie, reparti ospedalieri e strutture ambulatoriali, ho sempre vissuto la laurea non come un traguardo, ma come un punto di partenza.",
+  },
+  {
+    title: "La Filosofia",
+    text: "Ho maturato la consapevolezza che il corpo non può essere considerato solo un insieme di muscoli e articolazioni. Una Persona porta con sé emozioni, paure e credenze che influenzano il dolore e il recupero. Per questo mi sono specializzato nelle Neuroscienze del Dolore Cronico.",
+  },
+  {
+    title: "L'Approccio",
+    text: "Il Paziente deve comprendere il proprio disturbo e uscire dall'incontro con maggiore consapevolezza e meno timori. Integro trattamento manuale, esercizio terapeutico mirato e relazione terapeutica per accompagnare ogni Persona verso il recupero.",
+  },
+];
+
+const pullQuotes = [
+  { afterIndex: 1, text: "Far vivere meglio, e senza dolore, le Persone" },
+  {
+    afterIndex: 4,
+    text: "Il corpo non è solo un insieme di muscoli, tendini e articolazioni",
+  },
+  { afterIndex: 6, text: "Recuperare fiducia nel movimento" },
+];
+
 function ScrollIndicator({ show }: { show: boolean }) {
   return (
     <motion.div
@@ -129,6 +185,203 @@ function ParagraphBlock({
   );
 }
 
+function MilestoneNode({
+  milestone,
+  index,
+  progress,
+  total,
+}: {
+  milestone: { year?: string; label: string; sublabel?: string };
+  index: number;
+  progress: MotionValue<number>;
+  total: number;
+}) {
+  const threshold =
+    total > 1 ? 0.05 + (index / (total - 1)) * 0.85 : 0.05;
+
+  const dotScale = useTransform(
+    progress,
+    [Math.max(0, threshold - 0.05), threshold],
+    [0, 1]
+  );
+  const contentOpacity = useTransform(
+    progress,
+    [Math.max(0, threshold - 0.07), threshold],
+    [0, 1]
+  );
+  const contentX = useTransform(
+    progress,
+    [Math.max(0, threshold - 0.07), threshold],
+    [16, 0]
+  );
+
+  return (
+    <div className="relative pl-14 sm:pl-16 lg:pl-20">
+      <div className="absolute left-8 top-[5px] h-4 w-4 -translate-x-1/2 rounded-full border-[1.5px] border-[#2B3A54]/20 bg-white sm:h-5 sm:w-5 lg:left-10 lg:top-[3px] lg:h-6 lg:w-6">
+        <motion.div
+          className="absolute inset-0 rounded-full bg-[#2B3A54]"
+          style={{ scale: dotScale, willChange: "transform" }}
+        />
+      </div>
+
+      <motion.div
+        style={{
+          opacity: contentOpacity,
+          x: contentX,
+          willChange: "transform, opacity",
+        }}
+      >
+        {milestone.year && (
+          <span className="font-family-roboto-mono mb-0.5 block text-[0.6rem] font-medium tracking-[0.2em] uppercase text-[#2B3A54]/40 sm:text-xs lg:text-sm">
+            {milestone.year}
+          </span>
+        )}
+        <h3 className="text-base font-medium leading-snug sm:text-lg lg:text-xl">
+          {milestone.label}
+        </h3>
+        {milestone.sublabel && (
+          <p className="mt-0.5 text-xs text-[#2B3A54]/45 sm:text-sm lg:text-base">
+            {milestone.sublabel}
+          </p>
+        )}
+      </motion.div>
+    </div>
+  );
+}
+
+function Timeline() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.75", "end 0.25"],
+  });
+
+  return (
+    <section ref={ref} className="relative my-16 sm:my-24 lg:my-32">
+      <div className="absolute left-8 top-0 bottom-0 w-px -translate-x-1/2 bg-[#2B3A54]/10 lg:left-10" />
+
+      <motion.div
+        className="absolute left-8 top-0 bottom-0 w-px -translate-x-1/2 origin-top bg-[#2B3A54]/60 lg:left-10"
+        style={{ scaleY: scrollYProgress, willChange: "transform" }}
+      />
+
+      <div className="flex flex-col gap-12 sm:gap-16 lg:gap-20">
+        {milestones.map((m, i) => (
+          <MilestoneNode
+            key={i}
+            milestone={m}
+            index={i}
+            progress={scrollYProgress}
+            total={milestones.length}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PullQuote({ text }: { text: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.85", "start 0.3"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [0, 0.6, 1]);
+  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0]);
+  const filter = useTransform(() => `blur(${blurValue.get()}px)`);
+
+  return (
+    <div
+      ref={ref}
+      className="flex min-h-[25vh] items-center justify-center py-6 sm:min-h-[30vh] sm:py-8 lg:min-h-[35vh] lg:py-12"
+    >
+      <motion.p
+        className="font-libre-bodoni text-center text-xl italic leading-snug text-[#2B3A54]/80 sm:text-2xl md:text-3xl lg:text-5xl lg:leading-tight"
+        style={{
+          scale,
+          filter,
+          opacity,
+          willChange: "transform, filter, opacity",
+        }}
+      >
+        &ldquo;{text}&rdquo;
+      </motion.p>
+    </div>
+  );
+}
+
+function ChapterBlock({
+  chapter,
+  index,
+}: {
+  chapter: { title: string; text: string };
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.8", "start 0.35"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [40, 0]);
+
+  return (
+    <div
+      ref={ref}
+      className="flex min-h-[70vh] items-center py-12 md:min-h-screen md:py-20"
+    >
+      <motion.div style={{ opacity, y, willChange: "transform, opacity" }}>
+        <span className="font-family-roboto-mono text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#2B3A54]/30 sm:text-xs">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl">
+          {chapter.title}
+        </h2>
+        <p className="mt-4 max-w-lg text-base leading-relaxed text-[#2B3A54]/70 sm:text-lg lg:text-xl lg:leading-relaxed">
+          {chapter.text}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+function StickyStory() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="-mx-5 my-16 sm:-mx-8 sm:my-24 md:-mx-12 lg:-mx-20 lg:my-32"
+    >
+      <div className="md:flex">
+        <div className="overflow-hidden md:sticky md:top-0 md:h-screen md:w-5/12 md:shrink-0">
+          <motion.img
+            src="/benni.jpg"
+            alt="Federico Benni"
+            className="h-64 w-full object-cover object-top sm:h-80 md:h-full"
+            style={{ scale: imageScale, willChange: "transform" }}
+          />
+        </div>
+
+        <div className="px-5 sm:px-8 md:w-7/12 md:px-12 lg:px-20">
+          {chapters.map((ch, i) => (
+            <ChapterBlock key={i} chapter={ch} index={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ChiSonoPage() {
   const contentRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
@@ -176,9 +429,22 @@ export default function ChiSonoPage() {
             </h1>
           </motion.div>
 
-          {paragraphs.map((text, i) => (
-            <ParagraphBlock key={i} text={text} index={i} />
-          ))}
+          <Timeline />
+
+          <StickyStory />
+
+          {paragraphs.flatMap((text, i) => {
+            const elements = [
+              <ParagraphBlock key={`p-${i}`} text={text} index={i} />,
+            ];
+            const quote = pullQuotes.find((q) => q.afterIndex === i);
+            if (quote) {
+              elements.push(
+                <PullQuote key={`q-${i}`} text={quote.text} />
+              );
+            }
+            return elements;
+          })}
         </article>
       </div>
       <Footer />

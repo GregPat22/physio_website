@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import type L from "leaflet";
 
 const BOLOGNA_CENTER: [number, number] = [44.4949, 11.3426];
-const RADIUS_KM = 5;
+const RADIUS_KM = 2;
 const RADIUS_M = RADIUS_KM * 1000;
 
 const STUDIO_COORDS: [number, number] = [44.5012, 11.3476];
@@ -27,7 +27,7 @@ export default function BolognaMap() {
 
       const map = leaflet.map(mapRef.current, {
         center: BOLOGNA_CENTER,
-        zoom: 12,
+        zoom: 13,
         zoomControl: false,
         attributionControl: false,
         scrollWheelZoom: true,

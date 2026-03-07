@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import { Typewriter } from "motion-plus/react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const footerLinks = [
   { label: "RISORSE", href: "/risorse" },
@@ -17,7 +17,12 @@ const footerLinks = [
 export default function Footer() {
   const [emailValue, setEmailValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [typewriterKey, setTypewriterKey] = useState(0);
   const showPlaceholder = !isFocused && emailValue.length === 0;
+
+  const handleTypewriterComplete = useCallback(() => {
+    setTimeout(() => setTypewriterKey((k) => k + 1), 2000);
+  }, []);
 
   return (
     <footer className="bg-[#2B3A54] text-white">
@@ -130,8 +135,11 @@ export default function Footer() {
                 {showPlaceholder && (
                   <span className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-white/40">
                     <Typewriter
+                      key={typewriterKey}
                       speed="slow"
                       cursorStyle={{ backgroundColor: "rgba(255,255,255,0.4)" }}
+                      cursorBlinkRepeat={3}
+                      onComplete={handleTypewriterComplete}
                     >
                       name@email.com
                     </Typewriter>

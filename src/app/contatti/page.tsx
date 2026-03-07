@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import { motion } from "motion/react";
@@ -111,23 +112,33 @@ function StickyTape() {
 }
 
 export default function ContattiPage() {
+  const zCounter = useRef(10);
+  const [zIndices, setZIndices] = useState({ sheet1: 3, sheet2: 1, sheet3: 2 });
+
+  function bringToFront(sheet: "sheet1" | "sheet2" | "sheet3") {
+    zCounter.current += 1;
+    setZIndices((prev) => ({ ...prev, [sheet]: zCounter.current }));
+  }
+
   return (
     <>
       <Navbar />
 
       <main className="min-h-screen px-5 pt-20 pb-28 sm:px-8 sm:pt-24">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 md:flex-row md:flex-wrap md:items-start md:justify-center md:gap-0">
+        <div className="mx-auto flex max-w-5xl flex-col items-center md:flex-row md:flex-wrap md:items-start md:justify-center">
 
           {/* ── Sheet 1: Main notebook (contacts) ── */}
           <motion.div
-            className="relative z-10 cursor-grab active:cursor-grabbing"
+            className="relative cursor-grab active:cursor-grabbing"
             drag
             dragMomentum={false}
+            onDragStart={() => bringToFront("sheet1")}
             whileDrag={{ scale: 1.03, rotate: 0 }}
             initial={{ opacity: 0, y: 50, rotate: -2 }}
             animate={{ opacity: 1, y: 0, rotate: -1.5 }}
             transition={{ duration: 1, ease }}
             style={{
+              zIndex: zIndices.sheet1,
               willChange: "transform, opacity",
               filter: "drop-shadow(0 8px 24px rgba(43, 58, 84, 0.18))",
             }}
@@ -227,18 +238,20 @@ export default function ContattiPage() {
           </motion.div>
 
           {/* Side column for the two smaller sheets */}
-          <div className="flex flex-col items-center gap-10 md:ml-[-24px] md:mt-8 md:items-start md:gap-8">
+          <div className="mt-[-60px] flex flex-col items-center md:ml-[-70px] md:mt-6 md:items-start">
 
             {/* ── Sheet 2: Post-it (address) ── */}
             <motion.div
-              className="relative z-20 cursor-grab active:cursor-grabbing"
+              className="relative cursor-grab active:cursor-grabbing"
               drag
               dragMomentum={false}
+              onDragStart={() => bringToFront("sheet2")}
               whileDrag={{ scale: 1.05, rotate: 0 }}
               initial={{ opacity: 0, y: 40, rotate: 3 }}
               animate={{ opacity: 1, y: 0, rotate: 2.5 }}
               transition={{ duration: 0.8, delay: 0.3, ease }}
               style={{
+                zIndex: zIndices.sheet2,
                 willChange: "transform, opacity",
                 filter: "drop-shadow(0 6px 18px rgba(43, 58, 84, 0.14))",
               }}
@@ -306,14 +319,16 @@ export default function ContattiPage() {
 
             {/* ── Sheet 3: Grid paper (hours) ── */}
             <motion.div
-              className="relative z-30 cursor-grab active:cursor-grabbing md:ml-10"
+              className="relative mt-[-44px] cursor-grab active:cursor-grabbing md:mt-[-36px] md:ml-10"
               drag
               dragMomentum={false}
+              onDragStart={() => bringToFront("sheet3")}
               whileDrag={{ scale: 1.05, rotate: 0 }}
               initial={{ opacity: 0, y: 35, rotate: -1 }}
               animate={{ opacity: 1, y: 0, rotate: -1.2 }}
               transition={{ duration: 0.8, delay: 0.55, ease }}
               style={{
+                zIndex: zIndices.sheet3,
                 willChange: "transform, opacity",
                 filter: "drop-shadow(0 5px 16px rgba(43, 58, 84, 0.13))",
               }}

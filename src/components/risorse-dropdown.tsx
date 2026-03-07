@@ -17,7 +17,7 @@ export const risorseItems: RisorseItem[] = [
     description: "Articoli e approfondimenti",
   },
   {
-    label: "Dove Posso Ricevere",
+    label: "Dove Ricevo",
     href: "/risorse/dove-posso-ricevere",
     description: "Mappa e area di copertura",
   },

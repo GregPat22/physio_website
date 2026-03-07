@@ -33,8 +33,8 @@ function TitoliDiStudio({ baseDelay = 0 }: { baseDelay?: number }) {
           initial={{ opacity: 0, x: -12, filter: "blur(4px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           transition={{
-            duration: 1.2,
-            delay: baseDelay + i * 0.8,
+            duration: 0.7,
+            delay: baseDelay + i * 0.4,
             ease,
           }}
         >
@@ -45,8 +45,8 @@ function TitoliDiStudio({ baseDelay = 0 }: { baseDelay?: number }) {
               initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
-                duration: 0.8,
-                delay: baseDelay + i * 0.8 + 0.35,
+                duration: 0.5,
+                delay: baseDelay + i * 0.4 + 0.2,
                 ease,
               }}
             >
