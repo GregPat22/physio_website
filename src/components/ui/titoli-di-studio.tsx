@@ -1,54 +1,69 @@
+"use client";
+
+import Image from "next/image";
 import { motion } from "motion/react";
-import React from "react";
 
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 2,
-      ease: [0.42, 0, 0.58, 1] as const,
-    },
-  },
-};
+const ease = [0.16, 1, 0.3, 1] as const;
 
-const TitoliDiStudio = () => {
+const credentials = [
+  {
+    text: "•Laurea in Fisioterapia",
+    href: "https://corsi.unibo.it/laurea/fisioterapia",
+    logo: "unibo.svg",
+    alt: "Logo UniBO",
+    logoClass: "ml-2 inline-block align-middle h-8 w-auto md:h-5 md:w-5 lg:h-10 lg:w-10",
+  },
+  {
+    text: "•Master Universitario in Osteopatia",
+    href: "https://eominternacional.com/",
+    logo: "eom.png",
+    alt: "Logo EOM",
+    logoClass:
+      "ml-2 inline-block align-middle h-8 w-auto md:h-5 md:w-10 lg:h-10 lg:w-20",
+  },
+];
+
+function TitoliDiStudio({ baseDelay = 0 }: { baseDelay?: number }) {
   return (
-    <>
-      <motion.div className="m-8 flex w-fit flex-col md:mr-120 md:ml-20 lg:mr-120 lg:ml-20">
+    <div className="m-8 flex w-fit flex-col md:mr-120 md:ml-20 lg:mr-120 lg:ml-20">
+      {credentials.map((cred, i) => (
         <motion.p
-          className="font-family-roboto-mono mb-1 text-[0.625rem] font-medium tracking-widest text-gray-500 md:text-sm lg:text-xl"
-          variants={itemVariants}
+          key={cred.alt}
+          className={`font-family-roboto-mono text-[0.625rem] font-medium tracking-widest text-gray-500 md:text-sm lg:text-xl ${i === 0 ? "mb-1" : "mt-px"}`}
+          initial={{ opacity: 0, x: -12, filter: "blur(4px)" }}
+          animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          transition={{
+            duration: 1.2,
+            delay: baseDelay + i * 0.8,
+            ease,
+          }}
         >
-          •Laurea in Fisioterapia
-          <a href="https://corsi.unibo.it/laurea/fisioterapia" target="_blank">
-            <img
-              src="unibo.svg"
-              alt="Logo UniBO"
-              className="ml-2 inline-block h-8 w-auto md:h-5 md:w-5 lg:h-10 lg:w-10"
-            />
+          {cred.text}
+          <a href={cred.href} target="_blank">
+            <motion.span
+              className={cred.logoClass}
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: baseDelay + i * 0.8 + 0.35,
+                ease,
+              }}
+            >
+              <Image
+                src={`/${cred.logo}`}
+                alt={cred.alt}
+                width={cred.logo === "unibo.svg" ? 40 : 80}
+                height={cred.logo === "unibo.svg" ? 40 : 40}
+                className="h-full w-auto"
+                loading="lazy"
+              />
+            </motion.span>
           </a>
         </motion.p>
-        <motion.p
-          className="font-family-roboto-mono mt-px text-[0.625rem] font-medium tracking-widest text-gray-500 md:text-sm lg:text-xl"
-          variants={itemVariants}
-        >
-          •Master Universitario in Osteopatia
-          <a href="https://eominternacional.com/" target="_blank">
-            <img
-              src="eom.png"
-              alt="Logo EOM"
-              className="ml-2 inline-block h-8 w-auto md:h-5 md:w-10 lg:h-10 lg:w-20"
-            />
-          </a>
-        </motion.p>
-      </motion.div>
-    </>
+      ))}
+    </div>
   );
-};
+}
 
 export default TitoliDiStudio;

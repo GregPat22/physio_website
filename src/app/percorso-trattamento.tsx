@@ -152,7 +152,6 @@ export default function PercorsoTrattamento() {
                         ? "border-[#3c5074] bg-[#3c5074] text-white shadow-lg shadow-[#3c5074]/20"
                         : "border-[#2B3A54]/15 bg-white text-[#2B3A54]/35 group-hover:border-[#3c5074]/40 group-hover:text-[#2B3A54]/60"
                     }`}
-                    style={{ willChange: "transform" }}
                   >
                     <span className="font-family-open-sans text-xs font-bold md:text-sm">
                       {visit.number}
@@ -173,7 +172,6 @@ export default function PercorsoTrattamento() {
                   <motion.div
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-                    style={{ willChange: "transform" }}
                   >
                     <ChevronDown className="h-5 w-5 text-[#2B3A54]/30 md:h-6 md:w-6" />
                   </motion.div>
@@ -194,7 +192,6 @@ export default function PercorsoTrattamento() {
                         opacity: { duration: 0.3 },
                       }}
                       className="overflow-hidden"
-                      style={{ willChange: "height, opacity" }}
                     >
                       <div className="flex flex-col gap-3 pt-5 pb-2 pl-14 md:gap-4 md:pl-17">
                         {visit.steps.map((step, stepIndex) => {
@@ -211,7 +208,6 @@ export default function PercorsoTrattamento() {
                                 ease: [0.25, 0.46, 0.45, 0.94],
                               }}
                               className="flex items-start gap-3 md:gap-4"
-                              style={{ willChange: "transform, opacity" }}
                             >
                               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#3c5074]/6 md:h-9 md:w-9">
                                 <Icon className="h-4 w-4 text-[#3c5074]/70 md:h-4.5 md:w-4.5" />

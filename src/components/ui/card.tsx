@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -16,7 +17,7 @@ function Card({ image, index }: CardProps) {
       onHoverEnd={() => setShowOverlay(false)}
     >
       <motion.div className="relative flex h-auto w-70 items-center justify-center overflow-hidden bg-gray-50">
-        <img src={image} alt={image} className="w-full object-contain p-2" />
+        <Image src={image} alt={`Recensione ${index + 1}`} width={446} height={372} className="w-full object-contain p-2" loading="lazy" />
         <AnimatePresence>
           {showOverlay && (
             <motion.div

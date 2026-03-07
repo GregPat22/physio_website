@@ -17,14 +17,14 @@ export const risorseItems: RisorseItem[] = [
     description: "Articoli e approfondimenti",
   },
   {
-    label: "FAQ",
-    href: "/risorse/faq",
-    description: "Domande frequenti",
+    label: "Dove Posso Ricevere",
+    href: "/risorse/dove-posso-ricevere",
+    description: "Mappa e area di copertura",
   },
   {
-    label: "Guide",
-    href: "/risorse/guide",
-    description: "Esercizi e consigli pratici",
+    label: "Contatti",
+    href: "/contatti",
+    description: "Scrivici o vieni a trovarci",
   },
 ];
 
@@ -125,7 +125,6 @@ export default function RisorseDropdown() {
           className="ml-1.5 inline-flex items-center justify-center"
           animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
           transition={{ type: "spring", bounce: 0.3, visualDuration: 0.35 }}
-          style={{ willChange: "transform" }}
         >
           <ChevronUpIcon className="h-3 w-3" />
         </motion.span>
@@ -140,16 +139,12 @@ export default function RisorseDropdown() {
             animate="visible"
             exit="exit"
           >
-            {risorseItems.map((item, index) => (
+            {risorseItems.map((item) => (
               <motion.a
                 key={item.label}
                 href={item.href}
                 variants={itemVariants}
-                className={`flex flex-col px-5 py-3 transition-colors duration-75 hover:bg-[#2B3A54]/5 ${
-                  index !== risorseItems.length - 1
-                    ? "border-b border-[#2B3A54]/10"
-                    : ""
-                }`}
+                className="flex flex-col px-5 py-2.5 transition-colors duration-75 hover:bg-[#2B3A54]/5"
               >
                 <span className="text-[0.625rem] font-medium tracking-[0.05em] text-[#2B3A54]/80">
                   {item.label}
@@ -161,12 +156,6 @@ export default function RisorseDropdown() {
                 )}
               </motion.a>
             ))}
-            <a
-              href="/risorse"
-              className="flex items-center gap-1.5 border-t border-[#2B3A54]/10 px-5 py-2.5 text-[0.5625rem] font-medium tracking-[0.05em] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
-            >
-              Tutte le risorse →
-            </a>
           </motion.div>
         )}
       </AnimatePresence>

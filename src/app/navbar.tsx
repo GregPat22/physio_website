@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "motion/react";
 import RisorseDropdown, { risorseItems } from "@/components/risorse-dropdown";
@@ -45,17 +46,17 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!hasAnimated) {
-      const timer = setTimeout(() => setHasAnimated(true), 2500);
+      const timer = setTimeout(() => setHasAnimated(true), 1000);
       return () => clearTimeout(timer);
     }
   }, [hasAnimated]);
 
   const menuItems = [
     { label: "RISORSE", href: "/risorse", hasIcon: true },
-    { label: "CONTATTI", href: "/contatti", hasIcon: false },
+    { label: "CHI SONO", href: "/chi-sono", hasIcon: false },
     {
-      label: "CHI SONO",
-      href: "/chi-sono",
+      label: "PRENOTA",
+      href: "/prenota",
       hasIcon: false,
       isHighlighted: true,
     },
@@ -74,8 +75,9 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{
-              duration: hasAnimated ? 0.3 : 2.5,
-              ease: [0.4, 0, 0.2, 1],
+              duration: hasAnimated ? 0.3 : 0.6,
+              ease: [0.16, 1, 0.3, 1],
+              delay: hasAnimated ? 0 : 0.1,
             }}
           >
             <a
@@ -83,11 +85,14 @@ const Navbar = () => {
               className="flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-90"
               aria-label="Vai alla home"
             >
-              <img
+              <Image
                 src="/Logo_plain.png"
                 alt="Logo Dott. Federico Benni"
+                width={30}
+                height={30}
                 className="h-7.5 w-7.5 object-contain"
                 style={{ mixBlendMode: "lighten" }}
+                priority
               />
               <h2 className="font-family-roboto-flex font-medium">
                 Dott. Federico Benni
@@ -97,20 +102,20 @@ const Navbar = () => {
               <RisorseDropdown />
               <li className="text-[0.625rem] font-medium tracking-widest md:text-[0.625rem] lg:text-[0.625rem]">
                 <a
-                  href="/contatti"
+                  href="/chi-sono"
                   className="relative w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
                 >
-                  CONTATTI
+                  CHI SONO
                 </a>
               </li>
               <li className="text-[0.625rem] font-medium tracking-widest md:text-[0.625rem] lg:text-[0.625rem]">
                 <a
-                  href="/chi-sono"
+                  href="/prenota"
                   className="group relative block rounded-tl-lg px-4 py-2 font-light text-white md:px-3 md:py-1.5 lg:px-4 lg:py-2"
                 >
                   <span className="absolute inset-0 h-full w-full -translate-x-1 -translate-y-1 transform rounded-tl-lg bg-[#2B3A54] opacity-80 transition duration-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
                   <span className="absolute inset-0 h-full w-full translate-x-1 translate-y-1 transform rounded-tl-lg bg-[#1a2538] opacity-80 mix-blend-screen transition duration-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
-                  <span className="relative">CHI SONO</span>
+                  <span className="relative">PRENOTA</span>
                 </a>
               </li>
             </ul>
@@ -140,9 +145,11 @@ const Navbar = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  <img
+                  <Image
                     src="/Logo_plain.png"
                     alt="Logo Dott. Federico Benni"
+                    width={30}
+                    height={30}
                     className="h-7.5 w-7.5 object-contain"
                     style={{ mixBlendMode: "lighten" }}
                   />
@@ -241,7 +248,6 @@ const Navbar = () => {
                             className="inline-flex items-center justify-center"
                             animate={{ rotate: isRisorseExpanded ? 180 : 0, scale: isRisorseExpanded ? 1.1 : 1 }}
                             transition={{ type: "spring", bounce: 0.3, visualDuration: 0.35 }}
-                            style={{ willChange: "transform" }}
                           >
                             <ChevronUpIcon className="h-3 w-3" />
                           </motion.span>
@@ -266,7 +272,7 @@ const Navbar = () => {
                                 <a
                                   key={sub.label}
                                   href={sub.href}
-                                  className="flex flex-col px-8 py-2.5 transition-colors duration-75 hover:bg-[#2B3A54]/5"
+                                  className="flex flex-col px-5 py-2.5 transition-colors duration-75 hover:bg-[#2B3A54]/5"
                                   onClick={() => {
                                     setIsMenuOpen(false);
                                     setIsRisorseExpanded(false);
@@ -282,16 +288,6 @@ const Navbar = () => {
                                   )}
                                 </a>
                               ))}
-                              <a
-                                href="/risorse"
-                                className="flex items-center gap-1.5 px-8 py-2.5 text-[0.5625rem] font-medium tracking-[0.05em] text-[#2B3A54]/40 transition-colors duration-75 hover:text-[#2B3A54]/70"
-                                onClick={() => {
-                                  setIsMenuOpen(false);
-                                  setIsRisorseExpanded(false);
-                                }}
-                              >
-                                Tutte le risorse →
-                              </a>
                             </motion.div>
                           )}
                         </AnimatePresence>

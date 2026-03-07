@@ -21,7 +21,7 @@ const TrustBadge = () => {
         </p>
       </motion.div>
       <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-4 lg:px-8 lg:pr-0">
-        <div className="">
+        <div className="origin-top scale-125 lg:scale-150 shrink-0 mb-16 lg:mb-24">
           <a
             id="zl-url"
             className="zl-url"

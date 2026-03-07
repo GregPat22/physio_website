@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Phone } from "lucide-react";
@@ -28,10 +29,13 @@ export default function Footer() {
               href="/"
               className="group flex items-center gap-3 transition-opacity duration-300 hover:opacity-80"
             >
-              <img
+              <Image
                 src="/Logo_plain.png"
                 alt="Logo Dott. Federico Benni"
+                width={32}
+                height={32}
                 className="h-8 w-8 object-contain brightness-0 invert"
+                loading="lazy"
               />
               <span className="font-family-roboto-flex text-base font-medium tracking-wide">
                 Dott. Federico Benni

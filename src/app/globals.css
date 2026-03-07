@@ -110,6 +110,14 @@
     color: #2b3a54;
     min-height: 100vh;
   }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("/BG-Color.jpg") center / cover no-repeat;
+    will-change: transform;
+  }
   h1,
   h2,
   h3,

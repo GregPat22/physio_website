@@ -124,7 +124,7 @@ export default function FAQ() {
                               ease: "easeOut",
                             },
                           }}
-                          className="max-w-fit overflow-hidden will-change-[height,opacity]"
+                          className="max-w-fit overflow-hidden"
                         >
                           <motion.p
                             className="font-family-roboto-mono mt-3 max-w-2xl pr-2 text-xs leading-relaxed sm:mt-4 sm:pr-4 sm:text-sm md:mt-6 md:text-base"
