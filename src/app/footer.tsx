@@ -7,12 +7,7 @@ import { ArrowRight, Mail, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import { Typewriter } from "motion-plus/react";
 import { useState, useCallback } from "react";
-
-const footerLinks = [
-  { label: "RISORSE", href: "/risorse" },
-  { label: "CONTATTI", href: "/contatti" },
-  { label: "CHI SONO", href: "/chi-sono" },
-];
+import { risorseItems } from "@/components/risorse-dropdown";
 
 export default function Footer() {
   const [emailValue, setEmailValue] = useState("");
@@ -94,21 +89,50 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
-              Navigazione
-            </h3>
-            <nav className="flex flex-col gap-3">
-              {footerLinks.map((link) => (
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
+                Risorse
+              </h3>
+              <nav className="flex flex-col gap-2.5">
+                {risorseItems.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="group flex flex-col transition-colors duration-300"
+                  >
+                    <span className="relative w-fit text-sm text-white/70 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 group-hover:text-white group-hover:after:w-full">
+                      {item.label}
+                    </span>
+                    {item.description && (
+                      <span className="mt-0.5 text-xs text-white/35">
+                        {item.description}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xs font-semibold tracking-[2px] text-white/40 uppercase">
+                Navigazione
+              </h3>
+              <nav className="flex flex-col gap-2.5">
                 <a
-                  key={link.label}
-                  href={link.href}
+                  href="/chi-sono"
                   className="relative w-fit text-sm text-white/70 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:text-white hover:after:w-full"
                 >
-                  {link.label}
+                  Chi Sono
                 </a>
-              ))}
-            </nav>
+                <a
+                  href="/prenota"
+                  className="relative w-fit text-sm text-white/70 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+                >
+                  Prenota
+                </a>
+              </nav>
+            </div>
           </div>
 
           {/* Newsletter */}

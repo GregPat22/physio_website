@@ -307,6 +307,52 @@ function FormField({
   );
 }
 
+function buildCalendarDates(dateKey: string, time: string) {
+  const [y, m, d] = dateKey.split("-");
+  const [hh, mm] = time.split(":");
+  const start = new Date(+y, +m - 1, +d, +hh, +mm);
+  const end = new Date(start.getTime() + 60 * 60 * 1000);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const fmt = (dt: Date) =>
+    `${dt.getFullYear()}${pad(dt.getMonth() + 1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+  return { start: fmt(start), end: fmt(end) };
+}
+
+function getGoogleCalendarUrl(dateKey: string, time: string, name: string) {
+  const { start, end } = buildCalendarDates(dateKey, time);
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: "Visita Fisioterapica — Dott. Benni",
+    dates: `${start}/${end}`,
+    details: `Appuntamento per ${name}.\nIn attesa di conferma dal dottore.`,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function downloadICS(dateKey: string, time: string, name: string) {
+  const { start, end } = buildCalendarDates(dateKey, time);
+  const ics = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Fisioterapia Benni//Booking//IT",
+    "BEGIN:VEVENT",
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    "SUMMARY:Visita Fisioterapica — Dott. Benni",
+    `DESCRIPTION:Appuntamento per ${name}. In attesa di conferma.`,
+    "STATUS:TENTATIVE",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "prenotazione-fisioterapia.ics";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-6 border-b border-[#2B3A54]/12 py-2 last:border-0">
@@ -412,10 +458,12 @@ function CalendarPlaceholder() {
 // ── Hold-to-Confirm Button ───────────────────────────────────────────────────
 
 const HOLD_MS = 500;
-const PARTICLE_COLORS = [
-  "rgba(43, 58, 84, 0.55)",
-  "rgba(43, 58, 84, 0.3)",
-  "rgba(16, 185, 129, 0.45)",
+const GREEN_DOT_COLORS = [
+  "#10b981",
+  "#34d399",
+  "#6ee7b7",
+  "#059669",
+  "#a7f3d0",
 ];
 
 function useHoldSound() {
@@ -532,13 +580,17 @@ function HoldToConfirmButton({
         navigator.vibrate?.([10, 30, 15]);
       } catch {}
       setParticles(
-        Array.from({ length: 14 }, (_, i) => ({
-          id: i,
-          x: (Math.random() - 0.5) * 220,
-          y: -(Math.random() * 55 + 20),
-          size: Math.random() * 4 + 3,
-          color: PARTICLE_COLORS[i % PARTICLE_COLORS.length],
-        })),
+        Array.from({ length: 36 }, (_, i) => {
+          const angle = (Math.PI * 2 * i) / 36 + (Math.random() - 0.5) * 0.6;
+          const dist = Math.random() * 100 + 35;
+          return {
+            id: i,
+            x: Math.cos(angle) * dist,
+            y: Math.sin(angle) * dist,
+            size: Math.random() * 2.5 + 1.5,
+            color: GREEN_DOT_COLORS[i % GREEN_DOT_COLORS.length],
+          };
+        }),
       );
       setTimeout(() => confirmRef.current(), 180);
     }, HOLD_MS);
@@ -586,12 +638,16 @@ function HoldToConfirmButton({
         }`}
         animate={
           phase === "done"
-            ? { scale: [1, 1.035, 1] }
+            ? { scale: [1, 1.04, 1] }
             : phase === "holding"
               ? { scale: 0.985 }
               : { scale: 1 }
         }
-        transition={{ type: "spring", bounce: 0.2, visualDuration: 0.2 }}
+        transition={
+          phase === "done"
+            ? { duration: 0.35, ease: [0.22, 1, 0.36, 1], times: [0, 0.4, 1] }
+            : { type: "spring", bounce: 0.2, visualDuration: 0.2 }
+        }
         style={{ willChange: "transform", touchAction: "none" }}
         aria-label="Tieni premuto per inviare la richiesta"
       >
@@ -612,17 +668,20 @@ function HoldToConfirmButton({
         {particles.map((p) => (
           <motion.span
             key={p.id}
-            className="pointer-events-none absolute"
+            className="pointer-events-none absolute rounded-full"
             style={{
               width: p.size,
               height: p.size,
               backgroundColor: p.color,
               willChange: "transform, opacity",
             }}
-            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-            animate={{ x: p.x, y: p.y, opacity: 0, scale: 0.2 }}
+            initial={{ x: 0, y: 0, opacity: 1, scale: 0 }}
+            animate={{ x: p.x, y: p.y, opacity: 0, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.2, 0, 0, 1] }}
+            transition={{
+              duration: 0.6 + Math.random() * 0.3,
+              ease: [0.15, 0.6, 0.2, 1],
+            }}
           />
         ))}
       </AnimatePresence>
@@ -865,11 +924,72 @@ export default function PrenotaPage() {
                 {form.note && <SummaryRow label="Note" value={form.note} />}
               </motion.div>
 
-              <motion.button
-                className="mt-8 text-[0.6rem] font-medium tracking-[0.16em] text-[#2B3A54]/55 uppercase transition-colors hover:text-[#2B3A54]/80"
+              {/* Calendar add buttons */}
+              <motion.div
+                className="mt-6 flex items-center justify-center gap-3"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65, duration: 0.5 }}
+              >
+                <motion.a
+                  href={getGoogleCalendarUrl(
+                    selectedDate!,
+                    selectedTime!,
+                    `${form.nome} ${form.cognome}`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 border border-[#2B3A54]/18 px-4 py-2.5 text-[0.6rem] font-medium tracking-widest text-[#2B3A54]/70 uppercase transition-colors hover:border-[#2B3A54]/35 hover:text-[#2B3A54]"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", bounce: 0.3, visualDuration: 0.15 }}
+                  style={{ willChange: "transform" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+                    <path d="M8.5 2v3M15.5 2v3M2 8.5h20" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                    <text x="12" y="17" textAnchor="middle" fill="currentColor" fontSize="8" fontWeight="600">G</text>
+                  </svg>
+                  Google
+                </motion.a>
+
+                <motion.button
+                  onClick={() =>
+                    downloadICS(
+                      selectedDate!,
+                      selectedTime!,
+                      `${form.nome} ${form.cognome}`,
+                    )
+                  }
+                  className="flex items-center gap-2 border border-[#2B3A54]/18 px-4 py-2.5 text-[0.6rem] font-medium tracking-widest text-[#2B3A54]/70 uppercase transition-colors hover:border-[#2B3A54]/35 hover:text-[#2B3A54]"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", bounce: 0.3, visualDuration: 0.15 }}
+                  style={{ willChange: "transform" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                    <path d="M12 14v4M10 16h4"/>
+                  </svg>
+                  Apple
+                </motion.button>
+              </motion.div>
+
+              <motion.p
+                className="mt-3 text-[0.54rem] font-light text-[#2B3A54]/45"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0.75, duration: 0.4 }}
+              >
+                Aggiungi al calendario come promemoria
+              </motion.p>
+
+              <motion.button
+                className="mt-6 text-[0.6rem] font-medium tracking-[0.16em] text-[#2B3A54]/55 uppercase transition-colors hover:text-[#2B3A54]/80"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
                 onClick={resetBooking}
               >
                 Nuova prenotazione →
